@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <meta name="robots" content="index, follow, noai, noimageai">
+  <title>나만의 교장실 AI 비서 만들기 · 중·고등학교 교장 대상 생성형 AI 활용 연수</title>
+  <style>:root { --ink: #172033; --muted: #657086; --line: #dfe4ed; --soft: #f5f7fb; --blue: #2457f5; --nav: #111a2e; --green: #16a36b; --warn: #ffad22; --page-pad: clamp(28px,5.8vw,82px); --font-sans: "Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; scroll-behavior: smooth; }
+* { box-sizing: border-box; }
+body { margin: 0px; background: rgb(238, 241, 246); color: var(--ink); font-family: var(--font-sans); line-height: 1.7; letter-spacing: -0.01em; }
+.app aside { position: fixed; inset: 0px auto 0px 0px; width: 310px; height: 100vh; padding: 0 16px 28px; background: var(--nav); color: rgb(255, 255, 255); overflow-y: auto; z-index: 10; }
+.app main { min-height: 100vh; margin-left: 310px; background: rgb(255, 255, 255); }
+.side-head { position: sticky; top: 0; z-index: 1; margin: 0 -16px; padding: 20px 26px 14px; background: var(--nav); border-bottom: 1px solid rgb(45, 56, 80); }
+.brand { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; color: rgb(130, 145, 177); }
+aside h1 { margin: 6px 0 4px; font-size: 17px; line-height: 1.35; letter-spacing: -0.02em; }
+.side-sub, .side-foot { font-size: 12px; color: rgb(150, 162, 186); }
+aside nav { margin-top: 10px; }
+aside nav a { display: block; padding: 7px 10px 7px 22px; color: rgb(190, 200, 219); text-decoration: none; font-size: 14px; line-height: 1.45; border-left: 3px solid transparent; border-radius: 0 6px 6px 0; }
+aside nav a:hover { color: rgb(255, 255, 255); background: rgb(25, 36, 60); }
+aside nav .major { margin-top: 12px; padding-left: 10px; color: rgb(255, 255, 255); font-size: 15px; font-weight: 800; }
+aside nav a.active { color: rgb(255, 255, 255); background: rgb(30, 44, 74); border-left-color: var(--blue); font-weight: 700; }
+.side-foot { margin: 20px 10px 0; padding-top: 14px; border-top: 1px solid rgb(45, 56, 80); }
+.hero { padding: 86px var(--page-pad) 72px; background: linear-gradient(135deg, rgb(247, 249, 255), rgb(238, 243, 255) 58%, rgb(233, 255, 246)); border-bottom: 1px solid var(--line); }
+.kicker, .section-label, .topic-label, .eyebrow { font-size: 13px; font-weight: 800; letter-spacing: 0.13em; color: var(--blue); }
+.hero h1 { margin: 16px 0px; font-size: clamp(40px, 5vw, 70px); line-height: 1.08; letter-spacing: -0.055em; }
+.hero h1 em { color: var(--blue); font-style: normal; }
+.hero > p { max-width: 860px; color: rgb(79, 91, 114); font-size: 18px; }
+.hero-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 38px; background: rgb(220, 226, 237); border: 1px solid rgb(220, 226, 237); }
+.hero-grid div { background: rgb(255, 255, 255); padding: 16px; }
+.hero-grid b { display: block; font-size: 12px; color: rgb(125, 135, 153); }
+.hero-grid span { font-size: 14px; font-weight: 800; }
+.section { padding: 70px var(--page-pad); border-bottom: 1px solid var(--line); scroll-margin-top: 18px; }
+.section > h2, .session-head h2 { margin: 8px 0px 14px; font-size: 36px; letter-spacing: -0.04em; }
+.lead { font-size: 18px; max-width: 900px; }
+.three-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0px; }
+.three-cards article { padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: rgb(255, 255, 255); }
+.three-cards article > span { font-size: 12px; font-weight: 800; color: var(--blue); }
+.three-cards h3 { margin: 8px 0px 5px; font-size: 20px; }
+.three-cards p, .caption { color: var(--muted); font-size: 14px; }
+.notice, .warning { margin: 22px 0px; padding: 16px 19px; }
+.notice { border-left: 4px solid var(--blue); background: rgb(234, 240, 255); }
+.warning { border-left: 4px solid var(--warn); background: rgb(255, 246, 230); }
+.schedule { margin-top: 30px; }
+.schedule div { display: grid; grid-template-columns: 48px 125px 1fr; align-items: center; padding: 13px 0px; border-top: 1px solid var(--line); }
+.schedule span.badge { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 50%; background: var(--nav); color: rgb(255, 255, 255); font-size: 12px; }
+.schedule p { margin: 0px; }
+.session { padding-top: 0px; }
+.session-head { margin: 0 calc(var(--page-pad)*-1) 50px; padding: 52px var(--page-pad); background: var(--nav); color: rgb(255, 255, 255); }
+.session-head .eyebrow { color: rgb(125, 160, 255); }
+.session-head p { max-width: 900px; color: rgb(195, 204, 220); }
+.vibe-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 30px; padding-top: 28px; border-top: 1px solid rgb(45, 56, 80); }
+.vibe-quote { margin: 0; padding-left: 18px; border-left: 3px solid rgb(125, 160, 255); }
+.vibe-quote blockquote { margin: 0 0 10px; color: #fff; font-size: 21px; font-weight: 700; line-height: 1.5; letter-spacing: -0.03em; }
+.vibe-quote figcaption { color: rgb(160, 172, 196); font-size: 13px; }
+.vibe-meaning { margin: 18px 0 0; padding: 14px 16px; border-radius: 12px; background: rgb(25, 36, 60); color: rgb(215, 222, 236); font-size: 15px; }
+.vibe-meaning b { color: #fff; }
+.vibe-timeline { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.vibe-timeline li { display: grid; grid-template-columns: 74px 1fr; gap: 12px; padding: 12px 14px; border: 1px solid rgb(45, 56, 80); border-radius: 12px; background: rgba(255, 255, 255, 0.03); }
+.vibe-timeline time { color: rgb(125, 160, 255); font-size: 13px; font-weight: 800; letter-spacing: 0.02em; }
+.vibe-timeline b { display: block; color: #fff; font-size: 15px; }
+.vibe-timeline span { display: block; color: rgb(185, 195, 214); font-size: 14px; line-height: 1.55; }
+.vibe-sources { grid-column: 1 / -1; margin: 0; color: rgb(130, 145, 177); font-size: 12px; }
+.vibe-sources a { color: rgb(160, 180, 230); }
+@media (max-width: 1020px) { .vibe-intro { grid-template-columns: 1fr; } }
+.time { font-size: 13px; color: rgb(174, 185, 207); }
+.topic { margin-bottom: 70px; scroll-margin-top: 20px; }
+.topic h3 { margin: 8px 0px 12px; font-size: 28px; letter-spacing: -0.025em; }
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; margin: 18px 0px 26px; }
+.flow div { text-align: center; padding: 16px 12px; border-radius: 12px; background: rgb(237, 242, 255); }
+.flow span { display: block; font-size: 12px; font-weight: 800; color: var(--blue); }
+.flow b { display: block; }
+.flow small { display: block; margin-top: 5px; color: var(--muted); }
+.versus { display: grid; grid-template-columns: 1fr 54px 1fr; align-items: center; margin: 16px 0px 26px; }
+.versus > div { padding: 20px; border: 1px solid var(--line); border-radius: 13px; background: var(--soft); }
+.versus i { text-align: center; color: var(--blue); font-style: normal; font-weight: 900; }
+.table-wrap { overflow: auto; }
+table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+th { padding: 13px; text-align: left; color: rgb(255, 255, 255); background: var(--nav); }
+td { padding: 14px 13px; border-bottom: 1px solid var(--line); }
+.checklist { display: grid; gap: 7px; padding: 0px; list-style: none; }
+.checklist li { padding: 11px 14px; border-radius: 8px; background: var(--soft); }
+.checklist li::before { content: "✓"; margin-right: 8px; color: var(--blue); font-weight: 900; }
+.practice-brief { display: grid; gap: 8px; margin: 18px 0px; }
+.practice-brief > div { padding: 15px 18px; border: 1px solid rgb(200, 239, 221); border-radius: 12px; background: rgb(237, 255, 246); }
+.copybox { margin: 20px 0px; border: 1px solid rgb(207, 215, 230); border-radius: 12px; overflow: hidden; background: rgb(17, 26, 46); color: rgb(232, 238, 252); }
+.copyhead { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgb(30, 43, 71); font-size: 13px; font-weight: 800; }
+.copyhead button { padding: 5px 10px; border: 1px solid rgb(97, 112, 141); border-radius: 6px; background: transparent; color: rgb(255, 255, 255); cursor: pointer; }
+.copybox pre { white-space: pre-wrap; margin: 0px; padding: 20px; font: 13px / 1.72 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0px 26px; }
+.steps article { padding: 18px; border-top: 4px solid var(--blue); border-radius: 12px; }
+.steps strong { display: block; color: var(--blue); font-size: 12px; }
+.steps b { display: block; font-size: 18px; margin-top: 3px; }
+.sub-optional { margin-top: 10px; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); font-size: 14px; }
+.sub-optional .tag { margin-left: 0; }
+.steps .sub-optional b { display: inline; font-size: 14px; margin: 0 4px 0 2px; color: var(--muted); }
+.tag { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0; vertical-align: 1px; }
+.tag-req { background: var(--blue); color: #fff; }
+.tag-opt { border: 1px solid var(--line); background: #fff; color: var(--muted); font-weight: 700; }
+.final-box { padding: 28px; border-radius: 18px; background: linear-gradient(135deg, rgb(17, 26, 46), rgb(29, 47, 88)); color: rgb(255, 255, 255); }
+.final-box h3 { margin: 6px 0px 8px; font-size: 30px; }
+.final-box p { color: rgb(203, 213, 231); }
+code.inline { padding: 2px 6px; border-radius: 6px; background: rgb(238, 242, 248); font-family: ui-monospace, monospace; }
+.small { font-size: 13px; color: var(--muted); }
+.resource-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0px 28px; }
+.resource-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.resource-card b { display: block; margin-bottom: 4px; }
+.resource-card a { color: var(--blue); font-weight: 800; text-decoration: none; word-break: break-all; font-size: 13px; }
+.sample-link { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 22px 0; padding: 14px 18px; border: 1px solid rgb(203, 218, 255); border-radius: 12px; background: rgb(240, 245, 255); }
+.sample-link span { color: var(--muted); font-size: 14px; }
+.sample-link b { display: block; color: var(--ink); font-size: 15px; }
+.sample-link .resource-link { flex-shrink: 0; margin-top: 0; }
+@media (max-width: 680px) { .sample-link { flex-direction: column; align-items: flex-start; } }
+.resource-link { display: inline-block; margin-top: 8px; padding: 8px 12px; border: 1px solid rgb(203, 213, 225); border-radius: 8px; color: var(--blue); font-size: 13px; font-weight: 800; text-decoration: none; background: rgb(255, 255, 255); }
+.procedure { counter-reset: step 0; display: grid; gap: 10px; margin: 18px 0px 28px; }
+.procedure > div { position: relative; padding: 15px 16px 15px 54px; border: 1px solid var(--line); border-radius: 12px; background: rgb(255, 255, 255); }
+.procedure > div::before { counter-increment: step 1; content: counter(step); position: absolute; left: 16px; top: 15px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: rgb(255, 255, 255); font-size: 12px; font-weight: 900; }
+.sample-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0px 28px; }
+.sample-grid article { padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: var(--soft); }
+.term-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 22px 0px; }
+.term-grid article { padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.term-grid strong { display: block; color: var(--blue); font-size: 12px; letter-spacing: 0.08em; }
+.term-grid h4 { margin: 5px 0px 8px; font-size: 20px; }
+.talk { margin: 18px 0px; padding: 22px; border-left: 4px solid var(--green); background: rgb(241, 252, 247); }
+.talk p { margin: 0px 0px 14px; }
+.talk p:last-child { margin-bottom: 0px; }
+.example-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 18px 0px 24px; }
+.example-flow div { padding: 14px 12px; border-radius: 10px; background: rgb(255, 248, 235); }
+.example-flow b, .example-flow span { display: block; }
+.example-flow span { margin-bottom: 3px; color: rgb(154, 100, 16); font-size: 12px; font-weight: 800; }
+details.optional { margin-top: 8px; padding: 0 22px 6px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); }
+details.optional > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 20px 0; cursor: pointer; list-style: none; }
+details.optional > summary::-webkit-details-marker { display: none; }
+details.optional > summary::before { content: "▸"; color: var(--blue); font-weight: 900; }
+details.optional[open] > summary::before { content: "▾"; }
+details.optional .summary-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+details.optional .summary-hint { font-size: 13px; color: var(--muted); }
+details.optional[open] .summary-hint { display: none; }
+.profile-card { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--soft); }
+.profile-card h3 { margin: 0 0 6px; font-size: 22px; }
+.profile-card ul { margin: 10px 0 0; padding-left: 18px; }
+.profile-links { display: grid; gap: 8px; align-content: start; }
+.profile-links a { padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--blue); font-size: 14px; font-weight: 700; text-decoration: none; word-break: break-all; }
+.sample-shot { margin: 22px 0; }
+.sample-shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+.sample-shot.narrow img { max-width: 700px; margin: 0 auto; }
+.sample-shot.small img { max-width: 360px; }
+.sample-shot figcaption { margin-top: 10px; color: var(--muted); font-size: 14px; }
+@media (max-width: 680px) { .profile-card { grid-template-columns: 1fr; padding: 18px; } }
+.app aside { word-break: keep-all; }
+.topic .three-cards h3 { margin: 8px 0 5px; font-size: 20px; letter-spacing: -0.02em; }
+.block-title { margin: 34px 0 4px; font-size: 22px; letter-spacing: -0.02em; scroll-margin-top: 18px; }
+.break { padding: 54px var(--page-pad); background: rgb(246, 248, 252); border-bottom: 1px solid var(--line); }
+.break h2 { margin: 0px 0px 8px; font-size: 32px; }
+@media (max-width: 1020px) {
+  .app aside { display: none; }
+  .app main { margin-left: 0px; }
+  .hero-grid, .three-cards, .steps, .term-grid, .example-flow { grid-template-columns: 1fr 1fr; }
+  .flow { grid-template-columns: 1fr 1fr; }
+}
+.nav-toggle { position: fixed; top: 14px; left: 322px; z-index: 20; display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 255, 255, 0.94); color: var(--ink); font: 700 13px/1 var(--font-sans); cursor: pointer; box-shadow: 0 4px 14px rgba(17, 26, 46, 0.12); transition: left .25s ease; }
+.nav-toggle:hover { border-color: var(--blue); color: var(--blue); }
+.nav-toggle svg { width: 16px; height: 16px; }
+.app aside { transition: transform .25s ease; }
+.app main { transition: margin-left .25s ease; }
+body.nav-hidden .app aside { transform: translateX(-100%); }
+body.nav-hidden .app main { margin-left: 0; }
+body.nav-hidden .nav-toggle { left: 14px; }
+@media (max-width: 1020px) {
+  .app aside { display: block; width: min(310px, calc(100vw - 64px)); transform: translateX(-100%); }
+  .nav-toggle { left: 14px; }
+  body.nav-open .app aside { transform: none; box-shadow: 8px 0 24px rgba(17, 26, 46, 0.25); }
+  body.nav-open .nav-toggle { left: auto; right: 10px; padding: 0 11px; }
+  body.nav-open .nav-toggle span { display: none; }
+}
+@media (max-width: 680px) {
+  .hero, .section, .break { padding-left: 20px; padding-right: 20px; }
+  .hero { padding-top: 54px; }
+  .hero-grid, .three-cards, .steps, .flow, .resource-list, .term-grid, .example-flow { grid-template-columns: 1fr; }
+  .schedule div { grid-template-columns: 38px 100px 1fr; }
+  .versus { grid-template-columns: 1fr; }
+  .versus i { padding: 8px 0px; }
+  .session-head { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+  .section > h2, .session-head h2 { font-size: 30px; }
+  .topic h3 { font-size: 24px; }
+}</style>
+  
+<style>
+.tt{margin:0;padding-left:1.1em}.tt li{margin:2px 0}
+.dl-list{display:grid;gap:10px;margin:18px 0}
+.dl-card{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;color:var(--ink)}
+.dl-card:hover{border-color:var(--blue);background:var(--soft)}
+.dl-ico{flex:none;display:grid;place-items:center;width:44px;height:52px;border-radius:8px;background:rgb(237,242,255);color:var(--blue);font-size:11px;font-weight:800}
+.dl-body{flex:1}.dl-body b{display:block;font-size:16px}.dl-body span{display:block;font-size:13px;color:var(--muted)}
+.dl-btn{flex:none;padding:8px 14px;border-radius:8px;background:var(--blue);color:#fff;font-size:13px;font-weight:800}
+@media(max-width:680px){.dl-card{flex-wrap:wrap}}
+#slide .sample-shot{margin:8px 0}#slide .sample-shot img{max-height:420px;width:auto;max-width:100%;margin:0 auto}#slide .sample-shot figcaption{margin-top:4px;font-size:13px;text-align:center}
+#slide .dl-card{padding:10px 14px}
+.todo{color:#b42318;font-weight:700}
+main,#slide{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,.hero p,.lead{text-wrap:balance}
+p,li,td{text-wrap:pretty}
+td .tag{margin-bottom:2px}
+.tag.nap{background:#7c3aed}.tag.sheet{background:var(--green)}
+.tag{margin-left:0;margin-right:4px}
+.topic .small{display:block}
+.resource-card .small{display:block;margin-bottom:6px}
+.resource-card a{display:inline-block;margin:2px 0}
+.copybox pre{background:none;color:inherit}
+.hero-grid{grid-template-columns:repeat(3,1fr)}
+.sample-link .resource-link{margin:0 6px 0 0}
+.sample-link{flex-wrap:wrap;justify-content:flex-start;gap:6px}
+#slideBtn{position:fixed;right:16px;bottom:16px;z-index:30;background:var(--blue);color:#fff;border:0;border-radius:999px;padding:12px 20px;font:700 15px var(--font-sans);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#deck{position:fixed;inset:0;z-index:100;background:#0b1220;display:flex;flex-direction:column}
+#deck[hidden]{display:none}
+#viewport{flex:1;min-height:0;position:relative;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;background:#fff;display:flex;flex-direction:column;overflow:hidden;transform-origin:center center;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#master{flex:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 96px;background:var(--nav);color:#fff;font-weight:800;font-size:15px}
+#master .m-brand{font-size:11px;letter-spacing:.14em;color:rgb(130,145,177);margin-right:12px}
+#mbar{flex:none;height:4px;background:var(--line)}#prog{display:block;height:100%;background:var(--blue);width:0}
+#slide{flex:1;min-height:0;overflow:hidden;padding:28px 96px 12px;font-size:19px;line-height:1.55}
+#slide h1{font-size:46px;line-height:1.15;margin:12px 0}#slide h1 em{color:var(--blue);font-style:normal}
+#slide h3.st{margin:0 0 14px;font-size:32px;letter-spacing:-.03em}
+#slide .cont{font-size:16px;color:var(--muted);font-weight:500;margin-left:10px}
+#slide table{font-size:16px;margin-top:6px}#slide th,#slide td{padding:9px 12px}
+#slide .copybox{margin:10px 0}#slide .copybox pre{font-size:15px;padding:14px 18px}
+#slide p,#slide .notice,#slide .warning{margin:8px 0}
+#slide .notice,#slide .warning{padding:12px 16px}
+#slide .procedure{gap:8px;margin:10px 0}#slide .procedure>div{padding:10px 14px 10px 50px}
+#slide .resource-list{grid-template-columns:repeat(3,1fr);margin:10px 0}
+#slide .hero-grid{margin-top:20px}#slide .flow{grid-template-columns:repeat(5,1fr);margin:12px 0 16px}#slide .flow div{padding:10px 8px}#slide .hero-grid{grid-template-columns:repeat(3,1fr)}
+#pager{flex:none;display:flex;align-items:center;justify-content:center;gap:14px;height:40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;font-weight:700}
+#pager button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:6px;width:30px;height:26px;font-size:11px;cursor:pointer}
+#bar{flex:none;display:flex;align-items:center;justify-content:center;gap:16px;padding:8px;background:#111a2e;color:#cbd5e7;font-size:14px}
+#bar button{border:1px solid rgb(97,112,141);background:transparent;color:#fff;border-radius:8px;padding:6px 14px;font:700 14px var(--font-sans);cursor:pointer}
+@media print{#slideBtn,#deck{display:none!important}}
+
+aside nav .nav-title{padding:6px 10px 10px;font-size:12px;font-weight:800;letter-spacing:.12em;color:rgb(130,145,177)}
+aside nav .grp{margin-top:20px;padding-top:12px;border-top:1px solid rgb(45,56,80)}
+aside nav .nav-title+.grp{margin-top:0;border-top:0;padding-top:0}
+aside nav .grp-label{padding:0 10px 4px;font-size:11px;font-weight:800;letter-spacing:.1em;color:rgb(130,145,177)}
+aside nav a.l2{margin-top:0;padding:6px 10px;color:#fff;font-size:15px;font-weight:800;border-left:3px solid transparent}
+aside nav a.l3{margin-left:12px;padding:5px 10px 5px 14px;font-size:14px;border-left:1px solid rgb(45,56,80)}
+aside nav a.l4{display:none;margin-left:12px;padding:3px 10px 3px 30px;font-size:12.5px;color:rgb(150,162,186);border-left:1px solid rgb(45,56,80)}
+aside nav a.l4.show{display:block}
+aside nav a.active{border-left-color:var(--blue)}
+.dh{margin:30px 0 8px;padding:2px 0 2px 12px;border-left:4px solid var(--blue)}
+.dh b{font-size:1.06em}
+#slide .dh{margin:12px 0 8px}
+#slide .eb{margin:0 0 4px;font-size:14px;font-weight:800;letter-spacing:.06em;color:var(--blue)}
+#slide .outline{columns:2;column-gap:56px;font-size:16px;line-height:1.5}
+#slide .outline .og{break-inside:avoid;margin-bottom:12px}
+#slide .outline b{display:block;font-size:17px}
+#slide .outline span{display:block;padding-left:14px;color:var(--muted);font-size:14.5px}
+
+.base{margin:6px 0 14px;padding:8px 12px;border-left:4px solid var(--green);background:rgb(236,248,243);font-size:14.5px}
+.copybox pre{font:15px/1.8 var(--font-sans);letter-spacing:-.01em}
+.copybox pre.fmt{white-space:normal;padding:18px 20px}
+.pl{display:flex;gap:10px;margin:0 0 9px}.pl:last-child{margin-bottom:0}
+.pl .pk{flex:none;width:3.3em;color:rgb(140,180,255);font-weight:800}
+.pl.k2 .pk{color:rgb(110,220,180)}.pl.k3 .pk{color:rgb(255,200,110)}
+.pl .pt{flex:1;min-width:0}
+.pl.c{padding-left:calc(3.3em + 10px);margin-top:-5px}
+#slide .copybox pre.fmt{font-size:17px;padding:14px 18px}
+#slide .base{font-size:15px;padding:6px 12px}
+</style>
+
+<style>
+.qr-box{display:flex;gap:12px;align-items:center;margin-top:12px;padding:10px;border:1px solid rgb(45,56,80);border-radius:12px;background:rgb(25,36,60)}
+.qr-img{flex:none;display:block;width:84px;height:84px;padding:4px;border-radius:8px;background:#fff;line-height:0}
+.qr-img svg{width:100%;height:100%;display:block}
+.qr-txt{min-width:0;font-size:12px;color:rgb(190,200,219);line-height:1.45}
+.qr-txt b{display:block;color:#fff;font-size:13px}
+.qr-txt span{display:block;margin:2px 0 4px}
+.qr-txt a{color:rgb(125,160,255);font-weight:800;word-break:break-all;text-decoration:none}
+@media print{.qr-box{border-color:#999}}
+</style>
+</head>
+<body>
+<button class="nav-toggle" type="button" aria-controls="side-nav" aria-expanded="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12"/></svg><span>목차 숨기기</span></button>
+<div class="app">
+  <aside id="side-nav">
+    <div class="side-head">
+      <div class="brand">SELECTWAY · LECTURE NOTE</div>
+      <h1>나만의 교장실 AI 비서 만들기</h1>
+      <div class="side-sub">중·고등학교 교장 대상 생성형 AI 활용 연수 · 10.22(목)</div>
+      <div class="qr-box"><a class="qr-img" href="https://soopark-ai.github.io/nambu1022/" target="_blank" rel="noopener" aria-label="이 교안 페이지 QR코드"><svg width="31mm" height="31mm" version="1.1" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg"><path d="M1,1H2V2H1zM2,1H3V2H2zM3,1H4V2H3zM4,1H5V2H4zM5,1H6V2H5zM6,1H7V2H6zM7,1H8V2H7zM10,1H11V2H10zM11,1H12V2H11zM12,1H13V2H12zM16,1H17V2H16zM17,1H18V2H17zM18,1H19V2H18zM19,1H20V2H19zM20,1H21V2H20zM23,1H24V2H23zM24,1H25V2H24zM25,1H26V2H25zM26,1H27V2H26zM27,1H28V2H27zM28,1H29V2H28zM29,1H30V2H29zM1,2H2V3H1zM7,2H8V3H7zM9,2H10V3H9zM10,2H11V3H10zM12,2H13V3H12zM13,2H14V3H13zM16,2H17V3H16zM18,2H19V3H18zM20,2H21V3H20zM23,2H24V3H23zM29,2H30V3H29zM1,3H2V4H1zM3,3H4V4H3zM4,3H5V4H4zM5,3H6V4H5zM7,3H8V4H7zM10,3H11V4H10zM13,3H14V4H13zM15,3H16V4H15zM17,3H18V4H17zM19,3H20V4H19zM23,3H24V4H23zM25,3H26V4H25zM26,3H27V4H26zM27,3H28V4H27zM29,3H30V4H29zM1,4H2V5H1zM3,4H4V5H3zM4,4H5V5H4zM5,4H6V5H5zM7,4H8V5H7zM11,4H12V5H11zM13,4H14V5H13zM16,4H17V5H16zM17,4H18V5H17zM19,4H20V5H19zM20,4H21V5H20zM21,4H22V5H21zM23,4H24V5H23zM25,4H26V5H25zM26,4H27V5H26zM27,4H28V5H27zM29,4H30V5H29zM1,5H2V6H1zM3,5H4V6H3zM4,5H5V6H4zM5,5H6V6H5zM7,5H8V6H7zM9,5H10V6H9zM11,5H12V6H11zM12,5H13V6H12zM16,5H17V6H16zM17,5H18V6H17zM20,5H21V6H20zM23,5H24V6H23zM25,5H26V6H25zM26,5H27V6H26zM27,5H28V6H27zM29,5H30V6H29zM1,6H2V7H1zM7,6H8V7H7zM10,6H11V7H10zM11,6H12V7H11zM13,6H14V7H13zM16,6H17V7H16zM17,6H18V7H17zM18,6H19V7H18zM19,6H20V7H19zM20,6H21V7H20zM21,6H22V7H21zM23,6H24V7H23zM29,6H30V7H29zM1,7H2V8H1zM2,7H3V8H2zM3,7H4V8H3zM4,7H5V8H4zM5,7H6V8H5zM6,7H7V8H6zM7,7H8V8H7zM9,7H10V8H9zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM17,7H18V8H17zM19,7H20V8H19zM21,7H22V8H21zM23,7H24V8H23zM24,7H25V8H24zM25,7H26V8H25zM26,7H27V8H26zM27,7H28V8H27zM28,7H29V8H28zM29,7H30V8H29zM11,8H12V9H11zM13,8H14V9H13zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM19,8H20V9H19zM20,8H21V9H20zM1,9H2V10H1zM3,9H4V10H3zM5,9H6V10H5zM7,9H8V10H7zM11,9H12V10H11zM12,9H13V10H12zM13,9H14V10H13zM14,9H15V10H14zM15,9H16V10H15zM18,9H19V10H18zM20,9H21V10H20zM21,9H22V10H21zM25,9H26V10H25zM28,9H29V10H28zM1,10H2V11H1zM2,10H3V11H2zM3,10H4V11H3zM5,10H6V11H5zM9,10H10V11H9zM10,10H11V11H10zM13,10H14V11H13zM18,10H19V11H18zM21,10H22V11H21zM22,10H23V11H22zM23,10H24V11H23zM26,10H27V11H26zM29,10H30V11H29zM1,11H2V12H1zM3,11H4V12H3zM7,11H8V12H7zM10,11H11V12H10zM11,11H12V12H11zM13,11H14V12H13zM14,11H15V12H14zM18,11H19V12H18zM19,11H20V12H19zM23,11H24V12H23zM25,11H26V12H25zM27,11H28V12H27zM28,11H29V12H28zM29,11H30V12H29zM1,12H2V13H1zM2,12H3V13H2zM3,12H4V13H3zM10,12H11V13H10zM12,12H13V13H12zM14,12H15V13H14zM15,12H16V13H15zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM21,12H22V13H21zM24,12H25V13H24zM28,12H29V13H28zM2,13H3V14H2zM6,13H7V14H6zM7,13H8V14H7zM9,13H10V14H9zM11,13H12V14H11zM12,13H13V14H12zM13,13H14V14H13zM15,13H16V14H15zM18,13H19V14H18zM19,13H20V14H19zM21,13H22V14H21zM22,13H23V14H22zM23,13H24V14H23zM24,13H25V14H24zM26,13H27V14H26zM28,13H29V14H28zM29,13H30V14H29zM1,14H2V15H1zM4,14H5V15H4zM10,14H11V15H10zM11,14H12V15H11zM12,14H13V15H12zM13,14H14V15H13zM17,14H18V15H17zM21,14H22V15H21zM23,14H24V15H23zM26,14H27V15H26zM29,14H30V15H29zM2,15H3V16H2zM5,15H6V16H5zM6,15H7V16H6zM7,15H8V16H7zM11,15H12V16H11zM14,15H15V16H14zM17,15H18V16H17zM18,15H19V16H18zM21,15H22V16H21zM23,15H24V16H23zM24,15H25V16H24zM26,15H27V16H26zM28,15H29V16H28zM29,15H30V16H29zM9,16H10V17H9zM10,16H11V17H10zM11,16H12V17H11zM18,16H19V17H18zM21,16H22V17H21zM22,16H23V17H22zM23,16H24V17H23zM25,16H26V17H25zM26,16H27V17H26zM28,16H29V17H28zM2,17H3V18H2zM4,17H5V18H4zM7,17H8V18H7zM9,17H10V18H9zM10,17H11V18H10zM11,17H12V18H11zM12,17H13V18H12zM13,17H14V18H13zM17,17H18V18H17zM18,17H19V18H18zM20,17H21V18H20zM21,17H22V18H21zM22,17H23V18H22zM23,17H24V18H23zM26,17H27V18H26zM28,17H29V18H28zM29,17H30V18H29zM3,18H4V19H3zM5,18H6V19H5zM6,18H7V19H6zM10,18H11V19H10zM11,18H12V19H11zM12,18H13V19H12zM14,18H15V19H14zM17,18H18V19H17zM22,18H23V19H22zM23,18H24V19H23zM26,18H27V19H26zM27,18H28V19H27zM29,18H30V19H29zM1,19H2V20H1zM5,19H6V20H5zM7,19H8V20H7zM12,19H13V20H12zM15,19H16V20H15zM19,19H20V20H19zM24,19H25V20H24zM28,19H29V20H28zM29,19H30V20H29zM2,20H3V21H2zM4,20H5V21H4zM5,20H6V21H5zM8,20H9V21H8zM9,20H10V21H9zM12,20H13V21H12zM13,20H14V21H13zM14,20H15V21H14zM15,20H16V21H15zM16,20H17V21H16zM17,20H18V21H17zM18,20H19V21H18zM19,20H20V21H19zM20,20H21V21H20zM23,20H24V21H23zM25,20H26V21H25zM26,20H27V21H26zM28,20H29V21H28zM1,21H2V22H1zM3,21H4V22H3zM4,21H5V22H4zM6,21H7V22H6zM7,21H8V22H7zM11,21H12V22H11zM15,21H16V22H15zM16,21H17V22H16zM17,21H18V22H17zM18,21H19V22H18zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM23,21H24V22H23zM24,21H25V22H24zM25,21H26V22H25zM9,22H10V23H9zM10,22H11V23H10zM12,22H13V23H12zM13,22H14V23H13zM15,22H16V23H15zM17,22H18V23H17zM20,22H21V23H20zM21,22H22V23H21zM25,22H26V23H25zM27,22H28V23H27zM28,22H29V23H28zM29,22H30V23H29zM1,23H2V24H1zM2,23H3V24H2zM3,23H4V24H3zM4,23H5V24H4zM5,23H6V24H5zM6,23H7V24H6zM7,23H8V24H7zM10,23H11V24H10zM14,23H15V24H14zM18,23H19V24H18zM20,23H21V24H20zM21,23H22V24H21zM23,23H24V24H23zM25,23H26V24H25zM26,23H27V24H26zM28,23H29V24H28zM29,23H30V24H29zM1,24H2V25H1zM7,24H8V25H7zM13,24H14V25H13zM16,24H17V25H16zM18,24H19V25H18zM19,24H20V25H19zM21,24H22V25H21zM25,24H26V25H25zM26,24H27V25H26zM29,24H30V25H29zM1,25H2V26H1zM3,25H4V26H3zM4,25H5V26H4zM5,25H6V26H5zM7,25H8V26H7zM9,25H10V26H9zM10,25H11V26H10zM17,25H18V26H17zM18,25H19V26H18zM19,25H20V26H19zM21,25H22V26H21zM22,25H23V26H22zM23,25H24V26H23zM24,25H25V26H24zM25,25H26V26H25zM28,25H29V26H28zM29,25H30V26H29zM1,26H2V27H1zM3,26H4V27H3zM4,26H5V27H4zM5,26H6V27H5zM7,26H8V27H7zM10,26H11V27H10zM11,26H12V27H11zM12,26H13V27H12zM14,26H15V27H14zM17,26H18V27H17zM22,26H23V27H22zM24,26H25V27H24zM25,26H26V27H25zM27,26H28V27H27zM28,26H29V27H28zM29,26H30V27H29zM1,27H2V28H1zM3,27H4V28H3zM4,27H5V28H4zM5,27H6V28H5zM7,27H8V28H7zM9,27H10V28H9zM10,27H11V28H10zM11,27H12V28H11zM12,27H13V28H12zM14,27H15V28H14zM17,27H18V28H17zM18,27H19V28H18zM21,27H22V28H21zM24,27H25V28H24zM25,27H26V28H25zM26,27H27V28H26zM29,27H30V28H29zM1,28H2V29H1zM7,28H8V29H7zM10,28H11V29H10zM11,28H12V29H11zM13,28H14V29H13zM15,28H16V29H15zM17,28H18V29H17zM18,28H19V29H18zM19,28H20V29H19zM20,28H21V29H20zM21,28H22V29H21zM23,28H24V29H23zM25,28H26V29H25zM28,28H29V29H28zM1,29H2V30H1zM2,29H3V30H2zM3,29H4V30H3zM4,29H5V30H4zM5,29H6V30H5zM6,29H7V30H6zM7,29H8V30H7zM9,29H10V30H9zM10,29H11V30H10zM14,29H15V30H14zM15,29H16V30H15zM16,29H17V30H16zM17,29H18V30H17zM18,29H19V30H18zM20,29H21V30H20zM21,29H22V30H21zM22,29H23V30H22zM23,29H24V30H23zM25,29H26V30H25zM26,29H27V30H26zM28,29H29V30H28zM29,29H30V30H29z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg></a><div class="qr-txt"><b>교육생 접속</b><span>QR을 찍거나 아래 주소를 구글창에 붙여넣으세요</span><a href="https://soopark-ai.github.io/nambu1022/" target="_blank" rel="noopener">soopark-ai.github.io/nambu1022</a></div></div>
+    </div>
+    <nav>
+<div class="nav-title">전체 목차</div>
+<div class="grp"><div class="grp-label">교육 안내</div><a class="l2" href="#materials">실습 파일 다운로드</a><a class="l2" href="#overview">교육 개요</a><a class="l2" href="#flow">오늘의 흐름</a></div>
+<div class="grp"><div class="grp-label">세션 1</div><a class="l2" href="#s1">생성형 AI 기본 이해 및 최신 동향</a><a class="l3" href="#s1-1">1-1. 학생·교사·학교업무에 미치는 영향</a><a class="l3" href="#s1-2">1-2. 좋은 프롬프트 5가지 기법</a><a class="l3" href="#s1-3">1-3. 메타 프롬프트</a></div>
+<div class="grp"><div class="grp-label">세션 2</div><a class="l2" href="#s2">문서·계획안 검토 및 요약 (ChatGPT)</a><a class="l3" href="#s2-1">2-1. 화면과 파트너 만들기 3가지</a><a class="l3" href="#s2-2">2-2. 개인맞춤설정·메모리·데이터</a><a class="l3" href="#s2-3">2-3. 운영계획서 요약·질문 리스트</a><a class="l3" href="#s2-4">2-4. 학사일정과 운영계획서 비교</a><a class="l3" href="#s2-5">2-5. 설문지와 구글 폼 자동 생성</a><a class="l3" href="#s2-6">2-6. 가정통신문·결과 분석</a></div>
+<div class="grp"><div class="grp-label">세션 3</div><a class="l2" href="#s3">클로드로 나만의 AI 비서 만들기</a><a class="l3" href="#s3-1">3-1. 기초 용어와 핵심 기능</a><a class="l3" href="#s3-2">3-2. 사용량·개인정보·기억 가져오기</a><a class="l3" href="#s3-3">3-3. 클로드 프로젝트</a><a class="l3" href="#s3-4">3-4. 훈화·인사말 비서 만들기</a></div>
+<div class="grp"><div class="grp-label">세션 4</div><a class="l2" href="#s4">제미나이로 내 업무 맞춤형 앱 만들기</a><a class="l3" href="#s4-1">4-1. 개인 인텔리전스·워크스페이스</a><a class="l3" href="#s4-2">4-2. 바이브코딩이란?</a><a class="l3" href="#s4-3">4-3. 캔버스로 교장실 AI 비서 앱</a><a class="l3" href="#s4-4">4-4. 만든 앱 공유하기</a></div>
+<div class="grp"><div class="grp-label">세션 5</div><a class="l2" href="#s5">생활 속 유용한 활용법</a><a class="l3" href="#s5-1">5-1. 스마트폰 설치·음성 대화</a><a class="l3" href="#s5-2">5-2. 프로필·캐릭터·콜라주</a><a class="l3" href="#s5-3">5-3. 제미나이로 음악 만들기</a></div>
+<div class="grp"><div class="grp-label">마무리</div><a class="l2" href="#s6">마무리 · Q&amp;A</a><a class="l3" href="#s6-1">6-1. 유의사항</a><a class="l3" href="#s6-2">6-2. 문의</a></div>
+    </nav>
+    <div class="side-foot">ChatGPT · Claude · Gemini · 가상 학교(미래중학교) 자료로 실습</div>
+  </aside>
+  <main>
+<header class="hero">
+      <div class="kicker">AI SECRETARY · 2026.10.22 (목) 연수</div>
+      <h1>중·고등학교 교장 대상<br><em>나만의 교장실 AI 비서</em> 만들기</h1>
+      <p>생성형 AI 활용 연수. 공문·계획서를 요약하고 비교하고, 설문지와 가정통신문을 만들고, 훈화·인사말 비서와 학사일정 웹앱까지. ChatGPT, Claude, Gemini 세 가지를 직접 써 보며 교장실에서 바로 쓸 수 있는 결과물을 만들어요.</p>
+      <div class="hero-grid">
+        <div><b>일정</b><span>10월 22일(목)</span></div>
+        <div><b>주관</b><span>경기도교육청남부연수원</span></div>
+        <div><b>도구</b><span>ChatGPT · Claude · Gemini</span></div>
+      </div>
+    </header>
+<section class="section" id="materials"><div class="section-label">MATERIALS</div><h2>실습 파일 다운로드</h2><p>오늘 실습에 쓰는 가상 학교 ‘미래중학교’ 자료와 구글 폼 만들기 코드예요. 미리 내 컴퓨터에 받아 두세요.</p><div class="dl-list"><a class="dl-card" download="" href="./data/%EB%AF%B8%EB%9E%98%EC%A4%91%ED%95%99%EA%B5%90_2026_%ED%95%99%EA%B5%90%EC%9A%B4%EC%98%81%EA%B3%84%ED%9A%8D%EC%84%9C.pdf"><span class="dl-ico">PDF</span><span class="dl-body"><b>미래중학교_2026_학교운영계획서.pdf</b><span>학교 운영계획서 · 요약, 질문 리스트, 학사일정과 비교에서 사용</span><span>2-3, 2-4</span></span><span class="dl-btn">⬇ 다운로드</span></a><a class="dl-card" download="" href="./data/%EB%AF%B8%EB%9E%98%EC%A4%91%ED%95%99%EA%B5%90_2026%ED%95%99%EB%85%84%EB%8F%84_%ED%95%99%EC%82%AC%EC%9D%BC%EC%A0%95.pdf"><span class="dl-ico">PDF</span><span class="dl-body"><b>미래중학교_2026학년도_학사일정.pdf</b><span>2026학년도 학사일정 · 운영계획서 비교, 캔버스 웹앱 만들기에서 사용</span><span>2-4, 4-3</span></span><span class="dl-btn">⬇ 다운로드</span></a><a class="dl-card" download="" href="./data/%EB%AF%B8%EB%9E%98%EC%A4%91%ED%95%99%EA%B5%90_2026_1%ED%95%99%EA%B8%B0_%EA%B5%90%EC%9C%A1%ED%99%9C%EB%8F%99_%EB%A7%8C%EC%A1%B1%EB%8F%84%EC%A1%B0%EC%82%AC.xlsx"><span class="dl-ico">XLSX</span><span class="dl-body"><b>미래중학교_2026_1학기_교육활동_만족도조사.xlsx</b><span>교육활동 만족도 조사 결과(연수 실습용 가상 데이터) · 결과 분석에서 사용</span><span>2-6</span></span><span class="dl-btn">⬇ 다운로드</span></a><a class="dl-card" download="" href="./data/%EB%A7%8C%EC%A1%B1%EB%8F%84%20%EC%A1%B0%EC%82%AC%20%EA%B5%AC%EA%B8%80%20%ED%8F%BC%20%EB%A7%8C%EB%93%A4%EA%B8%B0%20%EC%BD%94%EB%93%9C.txt"><span class="dl-ico">TXT</span><span class="dl-body"><b>만족도 조사 구글 폼 만들기 코드.txt</b><span>구글 앱스 스크립트에 붙여 넣는 코드 · 설문지와 구글 폼 자동 생성에서 사용</span><span>2-5</span></span><span class="dl-btn">⬇ 다운로드</span></a></div></section>
+<section class="section" id="overview"><div class="section-label">OVERVIEW</div><h2>교육 개요</h2><div class="table-wrap"><table>
+<tr><th>일시</th><td>2026년 10월 22일(목)</td></tr>
+<tr><th>주관 · 강사</th><td>경기도교육청남부연수원 · 한국강사교육협회 박수현</td></tr>
+<tr><th>대상</th><td>중·고등학교 교장</td></tr>
+<tr><th>도구</th><td><span class="tag tag-req">ChatGPT</span>문서 요약·비교, 설문지·가정통신문 작성, 코드 생성<br/><span class="tag tag-req nap">Claude</span>프로젝트로 나만의 훈화·인사말 비서 만들기<br/><span class="tag tag-req sheet">Gemini</span>캔버스로 교장실 AI 비서 웹앱 만들기, 이미지·음악 만들기</td></tr>
+<tr><th>교육 목표</th><td>생성형 AI의 기본과 최신 동향을 이해하고, 교장실에서 자주 하는 일(공문·계획서 검토와 요약, 설문, 가정통신문, 인사말)을 AI와 함께 처리해 보며 나만의 AI 비서를 만든다</td></tr>
+<tr><th>수업이 끝나면</th><td>① 좋은 프롬프트를 만드는 5가지 기법과 메타 프롬프트를 쓸 수 있다<br/>② 운영계획서·학사일정을 올려 요약하고, 두 문서를 비교해 어긋난 곳을 찾는다<br/>③ 설문지를 만들고 구글 앱스 스크립트로 구글 폼까지 자동으로 만든다<br/>④ 클로드 프로젝트에 지침을 넣어 훈화·인사말 비서를 만든다<br/>⑤ 제미나이 캔버스로 학사일정 웹앱을 만들어 링크로 공유한다<br/>⑥ 스마트폰에서 음성·이미지·음악 기능을 일상에서 활용한다</td></tr>
+</table></div>
+<details class="optional"><summary><span class="summary-title">강사 소개</span><span class="summary-hint">눌러서 펼쳐 보세요</span></summary>
+<p><b>박수현</b> · 한국강사교육협회</p>
+<div class="table-wrap"><table><tr><th>주요 경력</th><td><ul class="tt"><li>한국강사교육협회 협회원</li><li>미래교육아카데미 전임강사</li><li>SOO EDU 교육 대표</li><li>중학교·고등학교 영어강사</li><li>YBM 어학원 영어문법·영어회화 전임강사</li><li>디지털 튜터 수료</li></ul></td></tr>
+<tr><th>자격 및 수료</th><td><ul class="tt"><li>챗GPT 생성AI 교육전문가 1급</li><li>디지털 자산관리사 1급 · 디지털 자산평가사 1급</li><li>영어교사자격증 2급 · 한국어 강사 2급</li><li>AICE FUTURE 1급 · 인공지능 활용 능력 자격증 1급</li><li>미래교육아카데미 디지털 튜터 수료</li><li>클로드 101 자격 1급 · 구글 제미나이 에듀케이터</li></ul></td></tr></table></div></details>
+</section>
+<section class="section" id="flow"><div class="section-label">AGENDA</div><h2>오늘의 흐름</h2><p>생성형 AI 세 가지(ChatGPT · Claude · Gemini)를 하나씩 직접 써 보며, 교장실에서 바로 쓸 수 있는 결과물을 만들어요.</p>
+<div class="table-wrap"><table><thead><tr><th>순서</th><th>주제</th><th>내용</th><th>도구</th></tr></thead><tbody><tr><td>01</td><td>생성형 AI 기본 이해 및 최신 동향</td><td>학생·교사·학교업무에 미치는 영향, 프롬프트 엔지니어링</td><td>—</td></tr><tr><td>02</td><td>문서·계획안 검토 및 요약</td><td>ChatGPT 설정, 운영계획서 요약, 질문 리스트, 학사일정 비교, 설문지·구글 폼, 가정통신문, 결과 분석</td><td><span class="tag tag-req">ChatGPT</span></td></tr><tr><td>03</td><td>교장실 AI 비서 웹앱 만들기</td><td>클로드 프로젝트로 훈화·인사말 비서, 제미나이 캔버스로 학사일정 웹앱</td><td><span class="tag tag-req nap">Claude</span><span class="tag tag-req sheet">Gemini</span></td></tr><tr><td>04</td><td>생활 속 유용한 활용법</td><td>스마트폰 앱 설치, 음성 대화, 프로필·캐릭터 이미지, 음악 만들기</td><td><span class="tag tag-req">ChatGPT</span><span class="tag tag-req sheet">Gemini</span></td></tr><tr><td>05</td><td>Q&amp;A</td><td>질문과 정리</td><td>—</td></tr></tbody></table></div><div class="resource-list">
+<div class="resource-card"><b>수업 자료 링크</b><span class="small">슬라이드의 QR · 단축 링크로 안내된 자료예요.</span><a href="https://bit.ly/1022경기도교육청남부연수" rel="noopener" target="_blank">bit.ly/1022경기도교육청남부연수</a></div>
+</div></section>
+<section class="section session" id="s1"><div class="session-head"><div class="eyebrow">PART 01 · 최신 동향</div><h2>생성형 AI 기본 이해 및 최신 동향</h2><p>생성형 AI가 학교 현장에 가져오는 변화를 먼저 살펴보고, 어떤 AI를 쓰든 통하는 <b>프롬프트 엔지니어링</b>의 기본 기법을 익혀요. 오늘 하는 모든 실습은 이 기법 위에서 진행됩니다.</p></div><div class="topic" id="s1-1"><h3>1-1. 생성형 AI가 학생·교사·학교업무에 미치는 영향</h3><p>생성형 AI는 좋은 점과 걱정되는 점이 함께 있어요. 영역별로 <b>기대되는 긍정적 영향</b>과 <b>주요 우려</b>를 저울처럼 나란히 놓고 살펴봅니다.</p><div class="table-wrap"><table><thead><tr><th>영역</th><th>기대되는 긍정적 영향</th><th>주요 우려</th></tr></thead><tbody><tr><td>학생</td><td>수준별 설명 · 개별 피드백 · 학습 접근성 향상</td><td>사고 과정 생략 · AI 의존 · 과제 대필</td></tr><tr><td>교사</td><td>수업안·활동지 제작 · 평가 문항 설계 · 자료 검색</td><td>결과 검증 · 평가 책임 · 추가 업무</td></tr><tr><td>학교 행정</td><td>공문 초안 · 자료 취합 · 설문 분석 · 보고 정리</td><td>개인정보 유출 · 부정확한 문서 · 자동 오류</td></tr><tr><td>학교 운영</td><td>데이터 기반 의사결정 · 학부모 소통 지원</td><td>기술 격차 · 비용 · 책임 소재</td></tr></tbody></table></div><div class="notice"><b>핵심 포인트</b><br/>AI는 학습과 수업 준비를 돕지만, 사고력 저하와 검증 부담을 함께 고려해야 해요. 학교업무에서도 효율은 높이되 정보 보호와 운영 책임을 함께 관리해야 합니다.</div><figure class="sample-shot"><img alt="생성형 AI가 학생·교사·학교업무에 미치는 영향 (1/3 학생과 교사)" src="./images/p05.jpg" width="1920" height="985"/><figcaption>생성형 AI가 학생·교사·학교업무에 미치는 영향 (1/3 학생과 교사)</figcaption></figure><figure class="sample-shot"><img alt="생성형 AI가 학생·교사·학교업무에 미치는 영향 (2/3 학교 행정과 학교 운영)" src="./images/p06.jpg" width="1920" height="985"/><figcaption>생성형 AI가 학생·교사·학교업무에 미치는 영향 (2/3 학교 행정과 학교 운영)</figcaption></figure></div><div class="topic" id="s1-2"><h3>1-2. 좋은 프롬프트를 만드는 5가지 기법</h3><p>프롬프트 엔지니어링은 AI에게 <b>좋은 질문</b>을 하는 기술이에요. 아래 5가지 기법을 한 번에 하나씩 더하면서 결과가 어떻게 달라지는지 비교해 보세요.</p><div class="table-wrap"><table><thead><tr><th>기법</th><th>하는 일</th><th>프롬프트 예시</th></tr></thead><tbody><tr><td>역할 부여</td><td>AI의 관점과 전문성을 정해 줍니다</td><td>“당신은 10년 차 마케터입니다”</td></tr><tr><td>목표·맥락</td><td>왜, 누구를 위한 글인지 알려 줍니다</td><td>“신입 직원 교육용 안내문입니다”</td></tr><tr><td>예시 제공</td><td>원하는 결과물의 견본을 보여 줍니다</td><td>“아래 예시와 같은 말투로 써 주세요”</td></tr><tr><td>단계별 사고</td><td>순서대로 생각하며 풀게 합니다</td><td>“단계별로 설명한 뒤 결론을 주세요”</td></tr><tr><td>출력 형식</td><td>길이·구조·표 형태를 지정합니다</td><td>“표로 정리하고 5줄 이내로 요약”</td></tr></tbody></table></div><p><b>실전 예시: 교장 비서관에게 공문 요약시키기</b></p><p>네 가지 기법(역할 · 목표·맥락 · 예시 제공 · 단계별 사고)을 한 프롬프트에 모두 넣은 예시예요. 마지막 줄 아래에 요약할 문서를 붙여 넣어 보내요.</p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>1. 역할
+당신은 학교 행정에 정통한 교장 비서관입니다. 수많은 공문서와 보고서에서 의사결정에 필요한 핵심만 가려내는 일을 합니다.
+
+2. 목표·맥락
+저는 학교 교장이고, 하루에 공문과 보고서를 수십 건 받습니다. 모든 문서를 끝까지 읽을 시간이 없으니, 1분 안에 읽고 판단할 수 있는 요약본이 필요합니다. 아래에 붙여넣는 문서를 요약해 주세요.
+
+3. 예시 제공
+요약은 아래 예시처럼 간결한 개조식으로 써 주세요.
+제목: 2학기 학교폭력 실태조사 실시 안내
+발신: ○○교육지원청
+핵심: 11월 3주차 전 학년 온라인 조사 실시
+제출 기한: 11월 25일(금)
+교장 조치: 담당 부장 지정 및 교직원 안내 필요
+
+4. 단계별 사고
+- 먼저 문서의 목적과 발신 기관을 파악하세요.
+- 다음으로 기한, 예산, 인원처럼 숫자와 날짜가 있는 항목을 찾으세요.
+- 그다음 교장이 결정하거나 승인해야 할 사항만 따로 가려내세요.
+- 마지막으로 위 내용을 정리해 요약</pre></div></div><div class="topic" id="s1-3"><h3>1-3. AI에게 프롬프트를 쓰게 하는 기술 (메타 프롬프트)</h3><p>메타 프롬프트 엔지니어링은 “좋은 질문을 만드는 일”을 AI와 함께 하는 방법이에요. 내가 쓴 프롬프트를 AI에게 주고 고쳐 달라고 하면 됩니다.</p><div class="flow" style="grid-template-columns:repeat(4,1fr)"><div><span>1</span><b>초안 작성</b><small>목적과 대상을 담아 첫 프롬프트를 씁니다</small></div><div><span>2</span><b>개선 요청</b><small>“부족한 점을 짚어 줘”라고 AI에게 묻습니다</small></div><div><span>3</span><b>프롬프트 보강</b><small>역할·맥락·형식이 채워진 개선본이 나옵니다</small></div><div><span>4</span><b>테스트·반복</b><small>결과를 확인하고 다시 다듬습니다</small></div></div><p>핵심은 한 번에 완벽하게 쓰기보다, 이 순환을 두세 번 돌리는 것입니다.</p><p><b>프롬프트 쓰기. 바로 쓰는 메타 프롬프트 템플릿</b></p><div class="copybox"><div class="copyhead"><span>메타 프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>당신은 프롬프트 엔지니어입니다.
+아래 프롬프트의 부족한 점 3가지를 알려 주세요.
+그다음 역할·맥락·출력 형식을 보강한 개선본을 작성해 주세요.
+[내 프롬프트를 여기에 붙여넣기]</pre></div><p><b>같은 요청, 이렇게 달라집니다</b></p><div class="table-wrap"><table><thead><tr><th>항목</th><th>개선 전</th><th>개선 후</th></tr></thead><tbody><tr><td>역할</td><td>없음</td><td>“교육 전문가로서”</td></tr><tr><td>대상</td><td>불분명</td><td>“70대 어르신 대상”</td></tr><tr><td>형식</td><td>자유 서술</td><td>“표와 3줄 요약”</td></tr><tr><td>분량</td><td>정해지지 않음</td><td>“500자 이내”</td></tr></tbody></table></div><p class="small">결과가 아쉬우면 개선본을 다시 메타 프롬프트에 넣어 한 번 더 돌립니다.</p></div></section>
+<section class="section session" id="s2"><div class="session-head"><div class="eyebrow">PART 02 · ChatGPT 실습</div><h2>문서·계획안 검토 및 요약</h2><p>ChatGPT를 내 업무에 맞게 설정한 뒤, 가상 학교 ‘미래중학교’의 운영계획서와 학사일정으로 <b>요약 → 질문 리스트 → 비교 → 설문지·구글 폼 → 가정통신문 → 결과 분석</b>까지 한 흐름으로 실습해요.</p></div><div class="topic" id="s2-1"><h3>2-1. ChatGPT 화면과 나만의 파트너 만들기 3가지</h3><p>ChatGPT는 <b>설정하고, 기억하게 하고, 안전하게 관리하기</b> 세 가지만 해 두면 내 파트너가 돼요.</p><div class="three-cards"><article><span>1</span><h3>개인맞춤설정</h3><p>원하는 답변 방식을 미리 알려주기. 나의 역할과 주요 업무, 자주 만드는 결과물, 선호하는 말투·형식을 정해요. <b>내 사용 설명서를 등록하는 기능</b>이에요.</p></article><article><span>2</span><h3>메모리 관리</h3><p>나의 업무 방식과 선호를 기억하게 하기. 반복 설명을 줄이고, 필요 없는 기억은 확인·삭제해요. <b>쓸수록 나에게 맞춰지는 기능</b>이에요.</p></article><article><span>3</span><h3>데이터 제어</h3><p>내 대화 데이터의 사용 범위 관리하기. 모델 개선 활용 여부를 고르고, 민감한 내용은 임시 채팅을 써요. <b>편리함과 보안을 함께 관리</b>해요.</p></article></div><div class="notice"><b>정리</b> 개인맞춤설정은 '답변 방식', 메모리는 '사용자 기억', 데이터 제어는 '정보 관리'예요.</div><p><b>ChatGPT 메인 화면</b></p><p>프롬프트는 <b>텍스트</b>(줄바꿈은 <code class="inline">Shift+Enter</code>)나 <b>음성</b>으로 입력해요. 화면 오른쪽 위의 <b>임시 채팅</b>은 대화를 기록하지 않고 쓰고 싶을 때 눌러요.</p><figure class="sample-shot"><img alt="ChatGPT 메인 화면: 임시 채팅, 입력창, + 메뉴, 프롬프트 입력 방법" src="./images/p16.jpg" width="1920" height="985"/><figcaption>ChatGPT 메인 화면: 임시 채팅, 입력창, + 메뉴, 프롬프트 입력 방법</figcaption></figure></div><div class="topic" id="s2-2"><h3>2-2. 개인맞춤설정 · 메모리 · 데이터 관리</h3><p><b>준비. 설정 화면 찾기</b></p><p>프로필 메뉴에서 <b>개인 설정</b>을 열고 <b>개인 맞춤 설정</b>으로 들어가요. 여기서 메모리 활성화와 메모리 요약 관리를 할 수 있어요.</p><figure class="sample-shot"><img alt="개인 설정 → 개인 맞춤 설정 화면 (메모리 활성화 · 메모리 요약)" src="./images/p18.jpg" width="1920" height="985"/><figcaption>개인 설정 → 개인 맞춤 설정 화면 (메모리 활성화 · 메모리 요약)</figcaption></figure><p><b>STEP 1. 메모리 관리하기</b></p><div class="procedure"><div><b>자동 기억:</b> 사용자의 직무, 업무 스타일, 선호 형식을 대화 속에서 스스로 학습해 기억해요.</div><div><b>반복 제거:</b> 새 창을 열 때마다 긴 배경 설명을 다시 적지 않아도 나에게 딱 맞춘 답변을 제공해요.</div><div><b>직접 제어:</b> 기억된 내용은 언제든지 설정 메뉴에서 확인하고, 불필요한 정보는 직접 삭제·관리할 수 있어요.</div></div><figure class="sample-shot"><img alt="메모리 관리: 메모리 요약과 '메모리 삭제 및 끄기' 메뉴" src="./images/p19.jpg" width="1920" height="985"/><figcaption>메모리 관리: 메모리 요약과 '메모리 삭제 및 끄기' 메뉴</figcaption></figure><p><b>STEP 2. 사용자 지정 지침 입력하기</b></p><p>사용자 지정 지침의 <b>[ChatGPT]</b> 오른쪽 화살표를 눌러 입력창을 열고, 아래 <b>추천 설정 예시</b>를 붙여 넣은 뒤 <b>[저장]</b>을 눌러요.</p><div class="copybox"><div class="copyhead"><span>추천 설정 예시 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>항상 존댓말로 답변해줘.
+설명은 가급적 짧고, 쉽고, 바로 이해할 수 있는 표현으로 해줘.
+답변은 장황한 문단보다 개조식이나 짧은 단락으로 정리해줘.
+먼저 핵심 내용을 요약하고, 필요할 때만 추가 설명을 덧붙여줘.
+사용자의 요청이 모호하거나 정보가 부족하면 바로 답을 단정하지 말고, 필요한 추가 질문을 먼저 해줘.
+실무에 바로 사용할 수 있도록 예시, 문장 초안, 템플릿 형태로 제시해줘.
+과장된 표현이나 불필요한 칭찬은 줄이고, 정확하고 실용적으로 답변해줘.
+사실과 의견을 구분해서 설명하고, 확실하지 않은 내용은 추측하지 말고 불확실하다고 밝혀줘.</pre></div><p class="small">슬라이드에는 이 목록의 마지막 줄이 화면 아래에서 잘려 있어요. 위 8줄까지가 보이는 내용이에요.</p><p><b>STEP 3. 교장 비서용 개인맞춤설정 예시</b></p><p>교장 업무에 맞춰 쓴 예시예요. 역할, 소통 방식, 출력 형식, 법적 한계, 개인정보 원칙, 편의성을 항목으로 나눠 적어요.</p><div class="copybox"><div class="copyhead"><span>개인맞춤설정 예시 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>역할 및 톤앤매너:
+학교 경영 및 교육행정을 총괄하는 학교장(교장)을 보좌하는 전문 비서이자 정책 자문 보조자 역할을 해줘. 교육적 품격과 신뢰감을 갖춘 정중하고 명확한 어조로 답변해줘.
+교육공동체 소통 및 교육적 감수성:
+교직원, 학생, 학부모, 지역사회와의 상생과 소통을 최우선으로 고려해줘. 훈화, 인사말, 대외 소통 문서 작성 시 교육철학을 반영하고 공감과 배려의 메시지를 담아줘.
+실무 중심 출력 형식:
+학교 경영 계획서, 입학·졸업식 축사, 교직원 회의 모두발언, 가정통신문 서한문, 대외 협력 공문 등 현장에서 즉시 활용 가능한 표준 서식, 개조식 구조, 연설문 형식으로 정리해줘.
+명확한 구분과 법적·제도적 한계 제시:
+사실(Fact)교육청 공문 지침, 행정적 제안을 명확히 구분하고, 초·중등 교육법, 교육공무원법, 학폭예방법 등 법적·감사적 판단이 필요한 사안은 단정하지 말고 상급 관청 질의 및 관련 규정 확인 필요을 명시해줘.
+개인정보 및 보안 원칙:
+학생 및 교직원의 인적사항, 징계·민원·건강 정보 등 민감한 개인정보가 드러나지 않도록 익명화 및 가명 처리(마스킹) 지침을 준수해줘.
+프롬프트 편의성:
+상황별(훈화문 작성, 교직원 회의, 민원 대응 등)로 교장실에서 바로 쓸 수 있는 프롬프트나 예시 문안은 복사가 편리하도록 코드블록에 넣어줘.</pre></div><p><b>STEP 4. 데이터 관리 확인하기</b></p><p>설정의 <b>데이터 관리</b>에는 <b>모델 개선을 위한 데이터 학습 허용</b>이 있어요. 내가 입력한 대화를 AI 모델의 성능 향상과 학습 데이터로 써도 되는지 정하는 기능이에요.</p><div class="table-wrap"><table><thead><tr><th>선택</th><th>의미</th></tr></thead><tbody><tr><td>허용</td><td>사용자와 AI의 대화 내용이 모델 개선과 정확도 향상을 위한 학습에 쓰여요. 서비스 품질 발전에 기여해요.</td></tr><tr><td>차단</td><td>대화 내용이 모델 학습에 활용되지 않아요. 개인정보나 민감한 업무 데이터가 학습되는 것을 막아요.</td></tr></tbody></table></div><figure class="sample-shot"><img alt="데이터 관리: 모델 개선을 위한 데이터 학습 허용 설정" src="./images/p22.jpg" width="1920" height="985"/><figcaption>데이터 관리: 모델 개선을 위한 데이터 학습 허용 설정</figcaption></figure></div><div class="topic" id="s2-3"><h3>2-3. 실습 1. 운영계획서 요약하고 질문 리스트 만들기</h3><p class="base"><b>사용 파일</b> <code class="inline">미래중학교_2026_학교운영계획서.pdf</code> (연습용 가상 학교 자료)</p><p><b>준비. 파일 첨부하는 방법</b></p><p>입력창의 <b>[+]</b> 버튼을 눌러 <b>[사진 및 파일 추가]</b>를 고르고 PDF를 올려요. 파일이 붙으면 아래 프롬프트를 입력하고 보내기 버튼을 눌러요.</p><figure class="sample-shot narrow"><img alt="+ 버튼 → 사진 및 파일 추가 → 파일 첨부 후 프롬프트 입력" src="./images/p26.jpg" width="1920" height="985"/><figcaption>+ 버튼 → 사진 및 파일 추가 → 파일 첨부 후 프롬프트 입력</figcaption></figure><p><b>STEP 1. 운영계획서를 1쪽으로 요약하기</b></p><p>교장이 5분 안에 파악할 수 있도록 요약해 달라고 해요. 문서에 없는 내용은 추측하지 않고 “문서에 없음”으로 표시하게 하는 것이 포인트예요.</p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 우리 학교 운영계획서를 교장이 5분 안에 파악할 수 있도록 1쪽으로 요약해줘.
+① 올해 핵심 목표 3가지
+② 주요 사업과 담당 부서
+③ 예산이 큰 사업 순위(상위 3개)
+④ 작년과 달라진 점
+순서로 정리하고, 문서에 없는 내용은 추측하지 말고 "문서에 없음"이라고 표시해줘.</pre></div><div class="sample-grid"><article><b>확인 포인트</b><br/>예산 숫자가 원문과 같은가요?</article><article><b>이어서 (확장)</b><br/>"교직원 회의용 5줄 브리핑으로 바꿔줘"</article></div><figure class="sample-shot"><img alt="운영계획서 요약 결과 예시" src="./images/p27.jpg" width="1920" height="985"/><figcaption>운영계획서 요약 결과 예시</figcaption></figure><p><b>STEP 2. 결재 전 질문 리스트 만들기</b></p><p>같은 대화창에서 이어서 물으면 파일을 다시 올리지 않아도 돼요. 단, 새 주제는 새 채팅에서 시작하세요.</p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>이 계획서를 결재하기 전에 교장으로서 담당 부장에게 확인해야 할 질문 7가지를 뽑아줘.
+일정의 현실성, 학생 안전, 예산, 학부모 민원 가능성, 교사 업무 부담의 관점에서
+각각 최소 1개씩 포함하고, 질문마다 근거가 된 문서의 쪽수나 항목을 적어줘.</pre></div><p class="small">관점 5가지: 일정 · 안전 · 예산 · 민원 · 업무 부담</p><figure class="sample-shot"><img alt="질문 리스트 결과 예시" src="./images/p29.jpg" width="1920" height="985"/><figcaption>질문 리스트 결과 예시</figcaption></figure></div><div class="topic" id="s2-4"><h3>2-4. 실습 1. 학사일정과 운영계획서 비교하기</h3><p class="base"><b>사용 파일</b> <code class="inline">미래중학교_2026학년도_학사일정.pdf</code>, <code class="inline">미래중학교_2026_학교운영계획서.pdf</code></p><p><b>STEP 1. 두 파일을 함께 첨부하고 비교 요청하기</b></p><p><b>[+]</b> 버튼으로 파일 두 개를 모두 첨부한 뒤 보내요.</p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 학사일정과 학교운영계획서를 비교해서 다음을 표로 정리해줘.
+① 운영계획서에는 있는데 학사일정에 날짜가 빠진 행사
+② 두 문서의 날짜가 서로 다른 행사
+③ 시험 기간과 겹치는 체험·행사, 같은 주에 행사가 몰린 시기
+표의 열: 구분 · 행사명 · 학사일정 날짜 · 운영계획서 날짜 · 교장이 확인할 점</pre></div><div class="notice"><b>도전 과제</b> 미래중학교 샘플에는 일부러 어긋난 곳을 숨겨 두었어요. AI가 몇 개나 찾을까요?</div><p><b>STEP 2. 학사일정 파일을 표로 정리하기</b></p><p>학사일정만 올려서 2학기 일정을 표로 뽑아 두면, 뒤에서 만들 웹앱의 재료가 돼요.</p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 학사일정에서 2학기 일정(8월~2월)을 모두 뽑아서 날짜 · 요일 · 행사명 · 대상(학년) · 비고 열로 된 표로 정리해줘.
+여러 날에 걸친 행사는 시작일과 종료일을 모두 적고, 읽기 어렵거나 확실하지 않은 부분은 "확인 필요"로 표시해줘.</pre></div><div class="three-cards"><article><span>CHECK</span><h3>눈으로 대조</h3><p>정기고사 일정이 원문과 같은가?</p></article><article><span>FIX</span><h3>틀리면 말로 고치기</h3><p>“10월 23일 현장학습은 전학년이야.”</p></article><article><span>ASK</span><h3>확인 필요 처리</h3><p>원문을 보고 채팅으로 알려 주기</p></article></div></div><div class="topic" id="s2-5"><h3>2-5. 실습 1. 설문지 만들고 구글 폼 자동 생성하기</h3><p>설문지 문항을 AI에게 쓰게 하고, <b>구글 앱스 스크립트</b> 코드를 받아 실행하면 구글 폼과 응답 스프레드시트가 한 번에 만들어져요.</p><p><b>STEP 1. 분기형 설문지 만들기</b></p><div class="notice"><b>빨간색으로 표시됐던 학교 이름</b><br/>슬라이드의 '미래중학교'(프롬프트 안의 빨간 글씨)는 연습용 가상 학교예요. 내 업무에 쓸 때는 우리 학교 이름으로 바꿔 넣으세요.</div><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>너는 [미래중학교] 교육기획 담당자이자 설문조사 전문가야.
+학생·학부모·교직원을 대상으로 '2026학년도 미래중학교 학교 만족도 조사' 설문지를 만들어줘.
+1. 설문 시작 시 응답자 유형(학생/학부모/교직원)을 선택하도록 해줘.
+2. 선택한 유형에 따라 해당 대상의 설문 문항만 표시되는 분기형 설문으로 구성해줘.
+3. 모든 설문은 익명으로 진행하며, 개인정보는 수집하지 마.
+4. 공통 조사 영역은 교육과정, 학교환경·안전, 소통·관계, 급식·복지, 학교활동으로 구성해줘.
+5. 대상별 관점과 역할을 반영해 각각 객관식 15문항, 주관식 2문항을 작성해줘.
+6. 객관식은 5점 만족도 척도(매우 불만족~매우 만족)를 적용해줘.
+7. 학생은 학교생활, 학부모는 자녀교육과 학교 소통, 교직원은 교육활동과 근무환경을 중심으로 질문해줘.
+8. 설문 안내문과 응답 방법을 포함하고, 쉽고 중립적인 문장으로 작성해줘.
+9. 응답자 유형별 결과 비교가 가능하도록 공통 영역과 문항 번호를 통일해줘.
+10. 구글 폼에서 바로 구현할 수 있도록 섹션 구성과 응답 유형별 분기 설정 방법도 안내해줘.</pre></div><figure class="sample-shot"><img alt="만족도 조사 설문지 결과 예시와 구글 폼 구성 안내" src="./images/p33.jpg" width="1920" height="985"/><figcaption>만족도 조사 설문지 결과 예시와 구글 폼 구성 안내</figcaption></figure><p><b>STEP 2. 앱스 스크립트 코드 받기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>너는 구글 앱스 스크립트 개발 전문가야.
+앞서 작성한 '2026학년도 미래중학교 학교 만족도 조사' 설문지를 구글 폼으로 자동 생성해줘.
+
+1. 기존 설문 문항과 응답 선택지를 빠짐없이 반영해줘.
+2. 학생·학부모·교직원 선택에 따라 해당 설문만 표시되도록 분기 설정해줘.
+3. 개인정보를 수집하지 않는 익명 설문으로 설정해줘.
+4. 설문 완료 후 다른 대상의 질문 없이 제출되도록 해줘.
+5. 설문 응답을 저장할 구글 스프레드시트를 자동 연결해줘.
+6. 실행 후 설문 링크, 편집 링크, 스프레드시트 링크를 로그에 출력해줘.
+7. 바로 실행할 수 있는 완성형 코드와 실행 방법을 알려줘.</pre></div><div class="notice"><b>코드 복사 팁</b> 코드를 다운로드 파일로 만들어 주면 복사하기 어려워요. 그럴 때는 “코드를 이 창에서 복사할 수 있도록 보여줘.”라고 요청하면 복사 버튼이 있는 코드 창으로 보여 줘요.</div><figure class="sample-shot"><img alt="받은 코드와 실행 방법, 코드 창의 복사 버튼" src="./images/p35.jpg" width="1920" height="985"/><figcaption>받은 코드와 실행 방법, 코드 창의 복사 버튼</figcaption></figure><p><b>STEP 3. 구글 앱스 스크립트 열고 새 프로젝트 만들기</b></p><p>구글에서 “구글 앱스 스크립트”를 검색해 Google for Developers 결과로 들어간 뒤 <b>[스크립트 시작하기]</b>를 눌러요.</p><figure class="sample-shot narrow"><img alt="‘구글 앱스 스크립트’ 검색 → Google for Developers → 스크립트 시작하기" src="./images/p36.jpg" width="1920" height="985"/><figcaption>‘구글 앱스 스크립트’ 검색 → Google for Developers → 스크립트 시작하기</figcaption></figure><div class="procedure"><div><b>[새 프로젝트]</b>를 눌러요.</div><div>제목을 바꿔요. (예: 2026 교육만족도 조사)</div><div><b>코드를 모두 지워요.</b> 그리고 복사한 코드를 붙여 넣어요.</div></div><figure class="sample-shot"><img alt="새 프로젝트 만들기: 제목 바꾸기, 기존 코드 지우기" src="./images/p37.jpg" width="1920" height="985"/><figcaption>새 프로젝트 만들기: 제목 바꾸기, 기존 코드 지우기</figcaption></figure><p><b>STEP 4. 저장 · 실행 · 권한 검토</b></p><div class="procedure"><div><b>저장</b> 버튼(디스크 아이콘)을 눌러요.</div><div><b>실행</b>을 눌러요.</div><div><b>권한 검토</b>를 눌러요. 처음 한 번 승인이 필요해요.</div></div><figure class="sample-shot"><img alt="저장 → 실행 → 승인 필요 창에서 권한 검토" src="./images/p38.jpg" width="1920" height="985"/><figcaption>저장 → 실행 → 승인 필요 창에서 권한 검토</figcaption></figure><p>‘Google에서 확인하지 않은 앱’ 화면이 나오면 다음 순서로 진행해요.</p><div class="procedure"><div>왼쪽 아래의 <b>[고급]</b> 탭을 열어요.</div><div><b>‘2026 교육만족도 조사로 이동’</b>을 눌러요.</div><div><b>모두 선택</b>한 뒤 <b>[계속]</b>을 눌러요.</div></div><figure class="sample-shot"><img alt="확인되지 않은 앱 경고: 고급 → 이동 → 모두 선택 후 계속" src="./images/p39.jpg" width="1920" height="985"/><figcaption>확인되지 않은 앱 경고: 고급 → 이동 → 모두 선택 후 계속</figcaption></figure><div class="notice"><b>코드 오류가 났을 때</b><br/>제미나이에 오류가 난 부분을 <b>스크린샷</b>으로 찍어 채팅창에 넣고 질문하세요.<br/>· 전체 화면 캡처: <code class="inline">PrtScn</code> (또는 <code class="inline">Windows 키 + PrtScn</code>을 누르면 파일로 자동 저장)<br/>· 원하는 영역 캡처: <code class="inline">Windows 키 + Shift + S</code></div><p><b>STEP 5. 실행 로그에서 링크 확인하기</b></p><p>실행이 끝나면 로그에 설문 링크, 편집 링크, 응답 스프레드시트 링크가 나와요. 링크를 복사해 주소창에 붙여 넣고 확인해요. 구글 드라이브에도 만들어진 3개의 파일이 있어요.</p><figure class="sample-shot"><img alt="실행 로그의 링크와 구글 드라이브에 만들어진 파일" src="./images/p41.jpg" width="1920" height="985"/><figcaption>실행 로그의 링크와 구글 드라이브에 만들어진 파일</figcaption></figure><figure class="sample-shot"><img alt="구글 폼 작성 완료: 응답자 유형에 따라 설문이 나뉘어요" src="./images/p42.jpg" width="1920" height="985"/><figcaption>구글 폼 작성 완료: 응답자 유형에 따라 설문이 나뉘어요</figcaption></figure></div><div class="topic" id="s2-6"><h3>2-6. 실습 1. 가정통신문 쓰고 설문 결과 분석하기</h3><p><b>STEP 1. 가정통신문 초안 쓰기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>너는 미래중학교 교장이야. '2026학년도 학교 만족도 조사' 참여를 안내하는 학부모 가정통신문을 작성해줘.
+1. 제목은 '2026학년도 학교 만족도 조사 참여 안내'로 해줘.
+2. 학생·학부모·교직원을 대상으로 실시하는 조사임을 안내해줘.
+3. 조사 목적은 학교 교육활동 평가와 향후 학교 운영 개선을 위한 의견 수렴이야.
+4. 조사 기간, 참여 대상, 설문 링크(QR코드 포함)를 안내할 수 있도록 구성해줘.
+5. 설문은 익명으로 진행하며, 응답 내용은 학교 운영 개선을 위한 자료로 활용된다는 점을 설명해줘.
+6. 학부모의 적극적인 참여를 부탁하는 정중하고 따뜻한 문구를 넣어줘.
+7. A4 1페이지 분량으로 제목, 인사말, 조사 개요, 참여 방법, 마무리 인사 순서로 작성해줘.
+8. 조사 기간과 설문 링크 등 미입력 정보는 임의로 만들지 말고 [입력 필요]로 표시해줘.
+9. 마지막에는 '미래중학교장'을 표기하고 공교육기관의 공식 가정통신문 형식으로 작성해줘.</pre></div><div class="notice"><b>다듬기 한 줄</b> “조금 더 정중하게” · “문장을 짧게” · “교장 인사 문단을 앞에 3줄로”</div><figure class="sample-shot"><img alt="가정통신문 초안 결과. 글쓰기 창에서 바로 편집할 수 있어요" src="./images/p44.jpg" width="1920" height="985"/><figcaption>가정통신문 초안 결과. 글쓰기 창에서 바로 편집할 수 있어요</figcaption></figure><p class="small">글쓰기 창에서는 직접 편집할 수 있어요. 일반 텍스트로 나올 때는 고칠 부분을 드래그한 뒤 ChatGPT에게 물어보는 방식으로 수정해요.</p><p><b>STEP 2. 만족도 조사 결과 파일 올리기</b></p><p class="base"><b>사용 파일</b> <code class="inline">미래중학교_2026_1학기_교육활동_만족도조사.xlsx</code></p><p><b>[+]</b> 버튼으로 파일을 첨부해요. 제미나이는 홈 화면에서 같은 파일을 올려 쓸 수 있어요.</p><p><b>STEP 3. 응답자별 평균과 낮은 영역 찾기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 교육활동 만족도 조사 결과를 분석해줘.
+- 응답자(학생·학부모·교원)별로 문항 평균을 표로 정리
+- 점수가 가장 낮은 영역 3가지와 응답자 간 차이가 큰 문항을 짚어줘.
+- 계산한 숫자는 소수점 둘째 자리까지</pre></div><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>낮은 영역 3가지에 대해 '자유 의견'에서
+관련 의견을 찾아 이유별로 묶어줘.
+각 묶음마다 의견 수와 대표 문장 1개를 보여줘.</pre></div><div class="notice"><b>확인 습관</b> “학부모 응답자 수와 소통 문항 평균을 다시 계산해서 확인해줘” — 숫자는 한 번 더 검산하세요.</div><figure class="sample-shot"><img alt="만족도 설문 조사 결과 정리 예시 (연수 실습용 가상 데이터)" src="./images/p48.jpg" width="1920" height="985"/><figcaption>만족도 설문 조사 결과 정리 예시 (연수 실습용 가상 데이터)</figcaption></figure><p><b>STEP 4. 개선안을 비교하고 운영위원회 보고서로 정리하기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>가장 낮은 영역인 '가정-학교 소통'을 개선할 방안 3가지를 제안하고,
+비용 · 교사 업무 부담 · 효과가 나타나는 시기 · 학부모 체감도 · 예상되는 어려움
+기준으로 비교표를 만들어줘. 마지막에 교장이 고를 때 고려할 점 2가지를 적어줘.</pre></div><div class="copybox"><div class="copyhead"><span>프롬프트 · [ 2 ] 자리에 고른 방안 번호를 넣으세요</span><button type="button">복사</button></div><pre>내가 [ 2 ]번 방안을 선택했어. 학교운영위원회에 보고할 수 있게
+조사 결과 요약 3줄 + 선택한 방안과 이유 + 추진 일정을 A4 반 쪽으로 정리해줘.</pre></div><div class="notice"><b>확장</b> 운영계획서 PDF를 함께 첨부하고 “이미 계획된 사업과 연결해서”를 추가해 보세요.</div></div></section>
+<section class="section session" id="s3"><div class="session-head"><div class="eyebrow">PART 03 · Claude 실습</div><h2>클로드로 나만의 AI 비서 만들기</h2><p>클로드의 핵심은 <b>프로젝트</b>예요. 한 번 지침을 넣어 두면 새 채팅을 열어도 같은 역할과 규칙으로 일해 주는, 나만의 훈화·인사말 비서를 만들어요.</p></div><div class="topic" id="s3-1"><h3>3-1. Claude 기초 용어와 핵심 기능</h3><p>클로드를 쓰기 전에 자주 나오는 14가지 용어를 알아 둬요. 오늘은 특히 <b>프로젝트</b>, <b>프로젝트 지침</b>, <b>메모리</b>, <b>환각</b>이 중요해요.</p><div class="term-grid"><article><strong>01</strong><h4>프롬프트</h4><p class="small">Claude에게 보내는 질문·명령·요청 등 모든 입력</p></article><article><strong>02</strong><h4>컨텍스트</h4><p class="small">현재 대화에서 Claude가 기억하는 내용 전체</p></article><article><strong>03</strong><h4>토큰</h4><p class="small">텍스트 처리 기본 단위 (한국어 1글자 ≈ 2~3 토큰)</p></article><article><strong>04</strong><h4>아티팩트</h4><p class="small">코드·문서·HTML 등 대화창 옆에 열리는 결과물</p></article><article><strong>05</strong><h4>프로젝트</h4><p class="small">대화·파일·지침을 주제별로 묶어 관리하는 공간</p></article><article><strong>06</strong><h4>프로젝트 지침</h4><p class="small">프로젝트 내 Claude의 역할과 규칙을 고정 설정</p></article><article><strong>07</strong><h4>시스템 프롬프트</h4><p class="small">API·개발 환경에서 대화 시작 전 역할을 설정</p></article><article><strong>08</strong><h4>메모리</h4><p class="small">대화 종료 후에도 장기적으로 나를 기억하는 기능</p></article><article><strong>09</strong><h4>환각</h4><p class="small">사실이 아닌 내용을 자신있게 말하는 현상 — 검증 필수</p></article><article><strong>10</strong><h4>웹 검색</h4><p class="small">실시간 인터넷 검색으로 최신 정보를 가져오는 기능</p></article><article><strong>11</strong><h4>Claude Code</h4><p class="small">터미널에서 Claude를 사용하는 코딩 전용 도구</p></article><article><strong>12</strong><h4>MCP</h4><p class="small">외부 앱·서비스와 Claude를 연결하는 프로토콜</p></article><article><strong>13</strong><h4>Add-in</h4><p class="small">Word·Excel·PowerPoint 내에 Claude를 내장시키는 기능</p></article><article><strong>14</strong><h4>Cowork</h4><p class="small">파일·태스크 관리를 자동화하는 Claude 협업 도구</p></article></div></div><div class="topic" id="s3-2"><h3>3-2. 클로드 화면, 사용량 아끼기, 개인정보 보호</h3><figure class="sample-shot"><img alt="Claude 메인 화면: 새 채팅, 프로젝트, + 메뉴, 모델 선택" src="./images/p53.jpg" width="1920" height="985"/><figcaption>Claude 메인 화면: 새 채팅, 프로젝트, + 메뉴, 모델 선택</figcaption></figure><p><b>방법 A. 사용량 아끼는 3가지</b></p><p>필요한 내용만 정확히 주면, 더 빠르고 더 좋은 답을 얻을 수 있어요.</p><div class="three-cards"><article><span>1</span><h3>한 번에 모아서 요청하기</h3><p>원하는 조건(주제, 분량, 스타일, 형식, 예시, 추가 조건)을 한 메시지에 모두 적어요.</p></article><article><span>2</span><h3>주제가 바뀌면 새 채팅</h3><p>대화가 길어질수록 AI가 읽어야 할 앞 내용이 많아져요.</p></article><article><span>3</span><h3>보내기 전에 한 번 읽기</h3><p>오탈자와 조건 누락을 확인하고 불필요한 내용을 빼면 주고받는 횟수가 줄어요.</p></article></div><figure class="sample-shot"><img alt="클로드 사용량 아끼는 3가지" src="./images/p52.jpg" width="1920" height="985"/><figcaption>클로드 사용량 아끼는 3가지</figcaption></figure><p><b>방법 B. 개인정보보호 설정</b></p><p>설정 → <b>개인정보보호</b>에서 <b>‘Help improve our AI models’</b>(AI 모델 개선에 대화 사용 허용)를 확인해요. 켜져 있지 않은지 꼭 살펴보세요.</p><figure class="sample-shot"><img alt="설정 → 개인정보보호 → Help improve our AI models" src="./images/p54.jpg" width="1920" height="985"/><figcaption>설정 → 개인정보보호 → Help improve our AI models</figcaption></figure><p><b>방법 C. ChatGPT의 기억 가져오기</b></p><p>ChatGPT에서 쌓아 온 기억은 클로드로 옮길 수 있어요. 설정의 <b>메모리</b>에서 <b>‘다른 AI 제공업체에서 메모리 가져오기’</b>를 눌러 안내되는 프롬프트를 ChatGPT에 붙여 넣고, 받은 결과를 클로드의 메모리에 추가해요.</p><figure class="sample-shot"><img alt="Claude 메모리 설정에서 ChatGPT 기억 가져오기" src="./images/p55.jpg" width="1920" height="985"/><figcaption>Claude 메모리 설정에서 ChatGPT 기억 가져오기</figcaption></figure></div><div class="topic" id="s3-3"><h3>3-3. 클로드 프로젝트: 나만의 AI 비서 공간</h3><p>프로젝트는 <b>특정 업무나 주제에 특화된 AI 작업 공간</b>이에요. 맞춤 지시사항과 참고 자료를 미리 설정해 두어, 매번 같은 설명을 반복하지 않고 일관된 품질의 결과물을 빠르게 얻을 수 있어요.</p><div class="three-cards"><article><span>TYPE 1</span><h3>맞춤형 AI 비서</h3><p>특정 업무에 특화된 전문 지원</p></article><article><span>TYPE 2</span><h3>지식 공유 공간</h3><p>문서, 자료를 AI가 학습하여 활용</p></article><article><span>TYPE 3</span><h3>반복 작업 자동화</h3><p>매번 설정하지 않아도 일관된 결과</p></article></div><p><b>프로젝트 = 클로드가 나를 기억하는 공간</b></p><div class="procedure"><div><b>대화가 끊겨도 기억한다.</b> 새 채팅을 열어도 프로젝트 지시문과 이전 맥락을 참고합니다. 어제 하던 이야기를 오늘 이어갈 수 있어요.</div><div><b>내 정보는 한 번만 입력.</b> 전공·성적·복용 약처럼 매번 설명하기 번거로운 정보를 지시문에 저장해 둡니다.</div><div><b>관련 대화를 한곳에 모은다.</b> 같은 주제의 채팅을 폴더처럼 묶어 관리합니다. 필요한 대화를 다시 찾기 쉬워집니다.</div><div><b>자료를 함께 올려둘 수 있다.</b> 이력서·성적표·처방전 같은 파일을 프로젝트에 두면 모든 대화에서 참고합니다.</div></div><p><b>일반 채팅과 프로젝트 비교</b></p><div class="table-wrap"><table><thead><tr><th>구분</th><th>일반 대화</th><th>프로젝트</th></tr></thead><tbody><tr><td>작업 방식</td><td>매번 새로운 대화 시작</td><td>사전 설정된 환경에서 작업</td></tr><tr><td>맥락 유지</td><td>대화마다 처음부터 설명 필요</td><td>지시사항이 자동 적용됨</td></tr><tr><td>자료 활용</td><td>매번 파일 업로드 필요</td><td>미리 등록된 문서 자동 참조</td></tr><tr><td>일관성</td><td>답변 스타일이 변동될 수 있음</td><td>항상 동일한 형식과 톤 유지</td></tr><tr><td>효율성</td><td>반복 설명으로 시간 소요</td><td>즉시 본론 진입, 시간 절약</td></tr></tbody></table></div><div class="notice"><b>프로젝트 = 전문가 모드로 작업하는 것</b></div><p><b>프로젝트 3가지 핵심 기능</b></p><div class="table-wrap"><table><thead><tr><th>기능</th><th>내용</th></tr></thead><tbody><tr><td>지침</td><td>프로젝트마다 다른 역할과 규칙 부여 · 작업 스타일, 출력 형식, 톤앤매너 고정 · 최대 6,000자까지 상세 설정 가능</td></tr><tr><td>컨텍스트</td><td>최대 100MB 문서 업로드(PDF, 엑셀, 워드 등) · 업로드한 자료를 AI가 자동으로 참조 · 매번 파일 첨부 없이도 내용 활용 가능</td></tr><tr><td>메모리</td><td>프로젝트 내 모든 대화 저장 및 검색 · 이전 작업물 재활용 및 개선 가능 · 업무 맥락이 계속 이어짐</td></tr></tbody></table></div></div><div class="topic" id="s3-4"><h3>3-4. 실습 2. 나만의 AI 비서 만들기 (훈화·인사말 비서)</h3><p><b>프로젝트 만드는 방법</b></p><div class="table-wrap"><table><thead><tr><th>단계</th><th>하는 일</th><th>설명</th></tr></thead><tbody><tr><td>STEP 1</td><td>사이드바에서 만들기</td><td>왼쪽 사이드바의 ‘프로젝트’ → ‘새 프로젝트’ 클릭</td></tr><tr><td>STEP 2</td><td>이름 정하기</td><td>주제가 드러나는 이름으로 설정 (예: 학교폭력·민원 대응 및 대외 소통 지원)</td></tr><tr><td>STEP 3</td><td>프로젝트 지시문 입력</td><td>내 정보와 Claude에게 부탁할 내용을 한 번만 입력</td></tr><tr><td>STEP 4</td><td>자료 업로드 (선택)</td><td>반복 참조할 핵심 문서 탑재 (개인정보 비식별화 필수)</td></tr><tr><td>STEP 5</td><td>대화 시작</td><td>프로젝트 안에서 채팅을 열면 지시문이 항상 적용됨</td></tr></tbody></table></div><figure class="sample-shot"><img alt="새 프로젝트 만들기: 프로젝트 생성 → 지침 설정" src="./images/p62.jpg" width="1920" height="985"/><figcaption>새 프로젝트 만들기: 프로젝트 생성 → 지침 설정</figcaption></figure><p><b>STEP 1. 프로젝트 지침 입력하기</b></p><p>프로젝트 화면 오른쪽의 <b>[지침]</b>을 열고 아래 내용을 붙여 넣어 저장해요. 학교 이름은 우리 학교로 바꿔요.</p><div class="copybox"><div class="copyhead"><span>프로젝트 지침 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>너는 [미래 중학교] 교장선생님의 훈화·인사말 작성 도우미야. 학교 행사와 상황에 맞는 자연스럽고 품격 있는 연설문을 작성해줘.
+
+[작성 전 확인]
+사용자가 입력한 내용에서 다음 6가지 정보를 확인하고, 부족한 부분이 있으면 질문해줘.
+1. 종류: 조회 훈화 / 입학식 / 졸업식 / 개학식 / 종업식 / 학부모 행사 / 교직원 회의 / 학교 행사 / 기타
+2. 대상: 학생 / 학부모 / 교직원 / 전체
+3. 핵심 주제 또는 전달 내용
+4. 말하기 시간: 1분 / 3분 / 5분 / 기타
+5. 분위기: 따뜻하게 / 격려하는 / 진중하게 / 친근하게
+이미 제공된 정보는 다시 묻지 말고 부족한 정보만 확인해줘.
+
+[작성 기준]
+- 학교급에 맞게 학생 눈높이에 맞춰 작성해줘.
+- 실제 말하는 듯한 자연스러운 존댓말로 작성해줘.
+- 행사, 대상, 분위기, 말하기 시간에 맞춰 작성해줘.
+- 확인되지 않은 학교 정보, 사건, 통계, 학생 사례, 진학·취업 실적은 만들지 마.
+- 상투적인 표현과 불필요한 반복은 줄여줘.
+
+[출력 형식]
+1. 제목
+2. 인사말 본문: 도입 → 핵심 메시지 → 마무리
+
+[추가 기능]
+- '다시 작성' 요청 시 같은 조건으로 새로운 원고를 작성해줘.
+- 수정 요청 시 해당 부분만 반영해줘.
+- '워드로 저장' 요청 시 Word(.docx) 파일로 만들어줘.</pre></div><p><b>STEP 2. 테스트하기</b></p><p>프로젝트 안에서 새 채팅을 열고 아래 요청을 하나씩 보내 보세요. 정보가 부족하면 AI가 먼저 추가 질문을 하고, 충분하면 바로 글을 써 줘요.</p><div class="copybox"><div class="copyhead"><span>테스트 1 · 교직원 조회 말씀</span><button type="button">복사</button></div><pre>다음 주 월요일 교직원 조회에서 전달할 말씀을 작성해줘.
+기말고사 감독 준수사항, 환절기 학생 건강 관리, 학교 안전 점검 강조해줘.</pre></div><div class="copybox"><div class="copyhead"><span>테스트 2 · 학부모 설명회 인사말</span><button type="button">복사</button></div><pre>학부모 대상 학교 설명회에서 인사말을 하려고 해.
+학교와 가정의 소통과 협력의 중요성을 전달하고 싶어.
+친근하고 신뢰감 있는 분위기로 1분 인사말을 작성해줘.</pre></div><div class="copybox"><div class="copyhead"><span>테스트 3 · 졸업식 교장 인사말</span><button type="button">복사</button></div><pre>졸업식에서 교장 인사말을 하려고 해.
+졸업생들의 새로운 출발을 축하하고 용기를 주는 도전과 자신감에 대한 내용을 담아줘.
+감동적이면서도 진정성 있는 분위기로 5분 분량으로 작성해줘.</pre></div><figure class="sample-shot"><img alt="테스트 결과: 정보가 부족하면 추가 질문, 충분하면 바로 글 출력" src="./images/p65.jpg" width="1920" height="985"/><figcaption>테스트 결과: 정보가 부족하면 추가 질문, 충분하면 바로 글 출력</figcaption></figure></div></section>
+<section class="section session" id="s4"><div class="session-head"><div class="eyebrow">PART 03 · Gemini 실습</div><h2>제미나이로 내 업무 맞춤형 앱 만들기</h2><p>제미나이를 내 구글 계정과 연결해 두고, <b>바이브코딩</b>으로 학사일정 웹앱을 만들어요. 만든 앱은 링크나 구글 사이트로 바로 공유할 수 있어요.</p></div><div class="topic" id="s4-1"><h3>4-1. 제미나이 화면과 개인 인텔리전스 · 구글 워크스페이스 연동</h3><figure class="sample-shot"><img alt="제미나이 메인 화면: 새 채팅, 입력창, + 메뉴, 모드 선택" src="./images/p67.jpg" width="1920" height="985"/><figcaption>제미나이 메인 화면: 새 채팅, 입력창, + 메뉴, 모드 선택</figcaption></figure><p><b>STEP 1. 개인 인텔리전스 켜기</b></p><p>설정의 <b>개인 인텔리전스</b>에서 <b>메모리</b>를 켜고, <b>연결된 앱</b>과 <b>Gemini 요청 사항</b>을 설정해요.</p><figure class="sample-shot"><img alt="개인 인텔리전스: 메모리 · 연결된 앱 · Gemini 요청 사항" src="./images/p68.jpg" width="1920" height="985"/><figcaption>개인 인텔리전스: 메모리 · 연결된 앱 · Gemini 요청 사항</figcaption></figure><p><b>STEP 2. 구글 워크스페이스 연동하기</b></p><p>연결된 앱에서 Google Workspace를 켜면 Gmail, Calendar, Docs, Drive, Keep, Tasks를 제미나이가 함께 볼 수 있어요. 연결 확인 창에서 <b>동의 항목을 체크</b>하고 <b>[연결]</b>을 눌러요.</p><figure class="sample-shot"><img alt="구글 워크스페이스 연동: Gmail · Calendar · Docs · Drive · Keep · Tasks" src="./images/p69.jpg" width="1920" height="985"/><figcaption>구글 워크스페이스 연동: Gmail · Calendar · Docs · Drive · Keep · Tasks</figcaption></figure><p><b>STEP 3. Gemini 요청 사항 입력하기</b></p><p>ChatGPT의 사용자 지정 지침과 같은 역할이에요. 스위치를 켠 뒤 <b>[+ 추가]</b>로 지침을 넣어요. <a href="#s2-2">2-2의 추천 설정 예시</a>를 그대로 써도 좋아요.</p><figure class="sample-shot"><img alt="Gemini 요청 사항: 스위치를 켜고 + 추가로 지침 입력" src="./images/p70.jpg" width="1920" height="985"/><figcaption>Gemini 요청 사항: 스위치를 켜고 + 추가로 지침 입력</figcaption></figure></div><div class="topic" id="s4-2"><h3>4-2. 바이브코딩이란?</h3><p>2025년 2월, OpenAI 창립 멤버 <b>안드레이 카파시</b>(전 테슬라 AI 총괄)가 SNS에 “바이브 코딩(vibe coding)”이라는 새로운 코딩 방식을 소개했어요.</p><div class="talk"><p><b>이제 코드를 몰라도 개발할 수 있는 시대</b></p><p>느낌(vibe)에 몸을 맡기고, 코드가 있다는 사실조차 잊을 만큼 기하급수적(exponential)으로 발전된 개발 방식 — 안드레이 카파시</p></div><p><b>공인된 메가 트렌드</b></p><p>영국 영어사전 <b>콜린스 사전</b>이 2025년 올해의 단어로 <b>‘바이브 코딩(Vibe Coding)’</b>을 선정했어요.</p></div><div class="topic" id="s4-3"><h3>4-3. 실습 3. 내 업무 맞춤형 앱 만들기 (캔버스)</h3><p>학사일정 표를 재료로 <b>캔버스</b> 기능을 써서 “교장실 AI 비서” 웹앱을 만들어요. 코드는 한 줄도 직접 쓰지 않아요.</p><p><b>STEP 1. 학사일정 파일 넣고 정리하기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 학사일정에서 2학기 일정(8월~2월)을 모두 뽑아서 날짜 · 요일 · 행사명 · 대상(학년) · 비고 열로 된 표로 정리해줘.
+여러 날에 걸친 행사는 시작일과 종료일을 모두 적고, 읽기 어렵거나 확실하지 않은 부분은 "확인 필요"로 표시해줘.</pre></div><p><b>STEP 2. 캔버스로 웹앱 만들기</b></p><p>입력창의 <b>[+]</b> → <b>[Canvas]</b>를 선택한 뒤 아래 프롬프트를 보내요. 입력창에 <b>Canvas</b> 칩이 붙으면 켜진 거예요.</p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>위의 학사일정 표로 "교장실 AI 비서" 웹앱을 만들어줘.
+- 첫 화면: 오늘 날짜와 요일을 크게. 오늘 날짜는 앱을 열 때마다 자동으로 바뀌게 해줘
+- 오늘 일정과 이번 주 일정을 카드로 보여줘
+- 오늘부터 7일 안에 있는 행사에는 "교장 점검 필요" 표시
+- '월별 달력 보기' 버튼
+- 글씨는 크게, 색은 차분한 남색 계열, 컴퓨터 화면에 맞게</pre></div><p><b>STEP 3. 수정하여 맞춤형 웹앱 완성하기</b></p><p>만들어진 앱을 보면서 “글씨를 더 크게”, “10월 23일 현장학습은 전학년이야” 처럼 말로 고쳐 가요.</p><figure class="sample-shot"><img alt="완성된 교장실 AI 비서: 오늘 일정 카드와 월별 달력" src="./images/p77.jpg" width="1920" height="985"/><figcaption>완성된 교장실 AI 비서: 오늘 일정 카드와 월별 달력</figcaption></figure><ul class="checklist"><li>정기고사 일정이 원문과 같은가?</li><li>여러 날 행사의 시작일·종료일이 맞게 들어갔는가?</li><li>‘교장 점검 필요’ 표시가 7일 이내 행사에만 붙는가?</li></ul></div><div class="topic" id="s4-4"><h3>4-4. 만든 앱 공유하기</h3><p><b>방법 A. 링크 공유</b></p><p>캔버스 화면 위쪽의 <b>공유</b> 아이콘을 누르면 공유 가능한 공개 링크가 만들어져요. <b>[링크 복사]</b>를 눌러 전달하면 누구나 앱을 열 수 있어요.</p><figure class="sample-shot"><img alt="캔버스 공유: 공개 링크 복사" src="./images/p78.jpg" width="1920" height="985"/><figcaption>캔버스 공유: 공개 링크 복사</figcaption></figure><p><b>방법 B. 구글 사이트로 내보내기</b></p><p><b>[내보내기]</b> → <b>[Google Sites]</b>를 선택하면 구글 사이트로 게시할 수 있어요. 웹 주소를 입력하고, 필요하면 <b>‘공개 검색결과에 내 사이트가 표시되지 않도록 요청’</b>을 체크한 뒤 <b>[게시]</b>를 눌러요.</p><figure class="sample-shot"><img alt="내보내기 → Google Sites → 웹에 게시" src="./images/p79.jpg" width="1920" height="985"/><figcaption>내보내기 → Google Sites → 웹에 게시</figcaption></figure></div></section>
+<section class="section session" id="s5"><div class="session-head"><div class="eyebrow">PART 04 · 생활 속 활용</div><h2>생활 속 유용한 활용법 (내 손안의 AI)</h2><p>AI는 책상 앞에서만 쓰는 도구가 아니에요. 스마트폰에서 음성으로 대화하고, 내 사진으로 이미지를 만들고, 글만 써서 노래까지 만들어 봐요.</p></div><div class="topic" id="s5-1"><h3>5-1. 스마트폰에 ChatGPT 설치하고 음성으로 대화하기</h3><p>이제 컴퓨터 밖으로 나와요. 스마트폰에서 <b>ChatGPT</b>를 찾아 설치하고 로그인해요. 제미나이도 같은 방법으로 설치해요.</p><div class="procedure"><div>스토어에서 <b>챗GPT</b>를 검색해요.</div><div>ChatGPT 앱을 <b>설치 또는 업데이트</b>해요. (비슷한 이름의 다른 앱을 조심하세요)</div><div><b>열기</b>를 눌러요.</div><div><b>로그인</b>해요.</div></div><figure class="sample-shot"><img alt="스마트폰에서 ChatGPT 찾기 → 설치 또는 업데이트 → 열기 → 로그인하기" src="./images/p81.jpg" width="1920" height="985"/><figcaption>스마트폰에서 ChatGPT 찾기 → 설치 또는 업데이트 → 열기 → 로그인하기</figcaption></figure><p><b>화면 구성</b></p><p><b>[+]</b> 버튼에서 카메라, 사진, 파일, 플러그인, 더 깊이 생각하기를 고를 수 있고, 오른쪽 위의 <b>임시 채팅</b>과 왼쪽 사이드바도 컴퓨터와 같은 역할을 해요.</p><figure class="sample-shot"><img alt="ChatGPT 모바일 화면 구성: + 메뉴, 임시 채팅, 사이드바" src="./images/p82.jpg" width="1920" height="985"/><figcaption>ChatGPT 모바일 화면 구성: + 메뉴, 임시 채팅, 사이드바</figcaption></figure><p><b>음성으로 채팅하기</b></p><div class="table-wrap"><table><thead><tr><th>기능</th><th>설명</th></tr></thead><tbody><tr><td>받아쓰기</td><td>입력창의 마이크 버튼을 눌러 말하면 글자로 바꿔 줘요.</td></tr><tr><td>실시간 대화</td><td>오른쪽의 음성 버튼을 누르면 AI와 말로 주고받으며 대화해요. 설정에서 음성 스타일을 고를 수 있어요.</td></tr></tbody></table></div><figure class="sample-shot"><img alt="음성으로 채팅하기: 받아쓰기와 실시간 대화" src="./images/p83.jpg" width="1920" height="985"/><figcaption>음성으로 채팅하기: 받아쓰기와 실시간 대화</figcaption></figure></div><div class="topic" id="s5-2"><h3>5-2. 사진으로 프로필·캐릭터·콜라주 만들기</h3><p>ChatGPT에 <b>내 사진</b>을 올려 새로운 이미지를 만들어 봐요. 사진은 <b>[+] → 카메라</b>로 바로 찍거나 사진 앨범에서 골라 올려요. 이미지 편집 기능은 계속 좋아지고 있어요.</p><p><b>프롬프트 A. 정장 프로필 사진 만들기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 사진 속 인물을 참고해서, 정장 프로필 사진을 만들어줘.
+[유지할 것]
+- 얼굴 생김새, 헤어스타일, 나이감, 안경 등 원래 인물의 특징은 그대로 유지
+[바꿀 것]
+- 복장: 남색 또는 진회색 정장, 흰 셔츠 (남성은 단정한 넥타이)
+- 표정: 입꼬리가 살짝 올라간 자연스럽고 신뢰감 있는 미소
+- 구도: 정면, 가슴 위까지 보이는 상반신
+- 배경: 밝은 회색 단색 스튜디오 배경
+- 조명: 얼굴이 밝고 고르게 보이는 부드러운 조명
+[출력]
+- 증명사진 비율(세로 3:4)의 사실적인 사진 스타일</pre></div><p><b>프롬프트 B. 내 캐릭터 생성</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>업로드한 인물 사진을 참고하여, 사진 속 인물을
+귀여운 미니미 3D 애니메이션 치비 캐릭터로 만들어 줘. 서 있는 모습이며, 배경은 흰색으로 해줘.</pre></div><p><b>프롬프트 C. 나의 취미생활 콜라주</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>첨부한 인물 사진의 얼굴 특징과 헤어스타일을 최대한 유지하여, 한 사람의 다양한 꿈과 취미를 표현한 3×3 총 9칸 콜라주 포스터를 만들어줘. 각 칸마다 동일 인물이 서로 다른 직업·활동을 하는 모습으로 표현한다.
+① 파도를 타는 서퍼
+② 우주를 유영하는 우주비행사
+③ 책을 읽는 독서가
+④ 실험하는 과학자
+⑤ 식물을 가꾸는 정원사
+⑥ 명상하는 요가·명상가
+⑦ 요리하는 셰프
+⑧ 목공 작업을 하는 목수
+⑨ 그림을 그리는 화가
+
+배경은 각 활동과 관련된 흑백 펜드로잉·낙서·스케치 일러스트로 채우고 필요한 부분에만 컬러 포인트를 넣어줘. 모든 칸에서 동일 인물의 얼굴과 헤어스타일을 일관되게 유지, 밝고 세련된 분위기,잡지 화보 같은 구성, 정교한 디테일, 선명한 고화질, 3:4 세로형, 글자·로고·워터마크없음.</pre></div></div><div class="topic" id="s5-3"><h3>5-3. 제미나이로 음악 만들기</h3><p>제미나이에서는 글만 써도 음악을 만들 수 있어요. 구글의 최신 음악 생성 AI 모델 <b>LYRIA(리리아)</b>를 기반으로 해요.</p><div class="table-wrap"><table><thead><tr><th>항목</th><th>내용</th></tr></thead><tbody><tr><td>입력</td><td>텍스트 프롬프트(장르, 악기, 감정, 속도 등) · 텍스트, 이미지, 샘플 트랙으로 단 몇 초 만에 고음질 음원 생성</td></tr><tr><td>출력</td><td>1분~3분 분량의 고품질 음원</td></tr><tr><td>특징</td><td>저작권 걱정 없는 배경음악(BGM) 생성, 가사가 포함된 노래 제작 가능</td></tr><tr><td>사용 제한</td><td>무료 버전 일일 10개, 프로 요금제는 일일 50개</td></tr></tbody></table></div><p><b>STEP 1. 화면 구성 확인하고 음악 만들기 선택하기</b></p><p>입력창의 <b>[+]</b>를 눌러 <b>[음악]</b>(오디오 트랙을 만드세요)을 골라요.</p><figure class="sample-shot"><img alt="제미나이 화면 구성: + 메뉴에서 음악 선택" src="./images/p88.jpg" width="1920" height="985"/><figcaption>제미나이 화면 구성: + 메뉴에서 음악 선택</figcaption></figure><p><b>STEP 2. 음악 요청하기</b></p><div class="copybox"><div class="copyhead"><span>프롬프트 예시 · 복사해서 사용하세요</span><button type="button">복사</button></div><pre>오늘 하루 잘 살아낸 나를 응원하는 트롯 스타일의 신나는 노래</pre></div><figure class="sample-shot"><img alt="음악 생성: 리믹스할 트랙 선택, 요청 입력, 결과 앨범 이미지" src="./images/p90.jpg" width="1920" height="985"/><figcaption>음악 생성: 리믹스할 트랙 선택, 요청 입력, 결과 앨범 이미지</figcaption></figure><p><b>STEP 3. 다운로드 · 공유 · 자막</b></p><p>화면을 터치해 재생하고, 위쪽 버튼으로 <b>다운로드 / 공유 / 자막</b>을 쓸 수 있어요.</p><figure class="sample-shot"><img alt="음악 다운로드 및 공유: 재생, 다운로드 · 공유 · 자막" src="./images/p91.jpg" width="1920" height="985"/><figcaption>음악 다운로드 및 공유: 재생, 다운로드 · 공유 · 자막</figcaption></figure></div></section>
+<section class="section session" id="s6"><div class="session-head"><div class="eyebrow">CLOSING · Q&amp;A</div><h2>마무리 · Q&amp;A</h2><p>오늘 만든 결과물을 정리하고, 궁금한 점을 나눠요.</p></div><div class="topic" id="s6-1"><h3>6-1. 오늘 교안에서 강조한 유의사항</h3><p>교안의 ‘생성형 AI 활용 시 유의사항’ 슬라이드는 강사별 교안으로 따로 진행돼요. 이 페이지에서는 오늘 실습 중에 나왔던 주의점을 한 번에 모아 정리했어요.</p><ul class="checklist"><li><b>개인정보·내부자료 입력 주의.</b> 민감한 내용은 임시 채팅을 쓰고, 학생·교직원 정보는 익명화·가명 처리해요.</li><li><b>데이터 학습 허용 여부 확인.</b> ChatGPT의 ‘모델 개선을 위한 데이터 학습 허용’과 클로드의 ‘Help improve our AI models’ 설정을 점검해요.</li><li><b>숫자는 원문과 대조.</b> 요약된 예산·날짜가 문서와 같은지 확인하고, 계산한 값은 다시 계산해 달라고 해서 검산해요.</li><li><b>문서에 없는 내용은 추측 금지.</b> “문서에 없음”으로 표시하게 하고, 입력되지 않은 정보는 [입력 필요]로 남겨요.</li><li><b>환각 주의.</b> AI는 사실이 아닌 내용을 자신 있게 말할 수 있어요. 검증은 필수예요.</li><li><b>법적·제도적 판단은 단정하지 않기.</b> 상급 관청 질의와 관련 규정 확인이 필요한 사안은 AI 답만 믿지 않아요.</li><li><b>프로젝트에 자료를 올릴 때는 개인정보 비식별화.</b></li><li><b>AI에 기대는 만큼 사고력도 지키기.</b> 학습과 수업 준비를 돕는 도구로 쓰되, 결과를 검증하는 부담까지 함께 고려해요.</li></ul></div><div class="topic" id="s6-2"><h3>6-2. 문의</h3><div class="resource-list"><div class="resource-card"><b>한국강사교육협회</b><span class="small">네이버에서 ‘한국강사교육협회’를 검색하거나, 네이버 카페 ‘한국강사교육협회’를 찾아보세요.</span></div><div class="resource-card"><b>전화</b><span class="small">010-5068-5038</span></div><div class="resource-card"><b>이메일</b><a href="mailto:chatgpt.edu119@gmail.com">chatgpt.edu119@gmail.com</a></div></div><p class="small">더 많은 AI 소식과 교육을 만나보세요.</p></div></section>
+  </main>
+</div>
+<button id="slideBtn" type="button">▶ 슬라이드로 보기</button>
+<div id="deck" hidden>
+  <div id="viewport"><div id="stage">
+  <div id="master"><span>나만의 교장실 AI 비서 만들기</span></div>
+  <div id="mbar"><i id="prog"></i></div>
+  <div id="slide"></div>
+  <div id="pager"><button id="prev" type="button" aria-label="이전">◀</button><span id="pg"></span><button id="next" type="button" aria-label="다음">▶</button></div>
+  </div></div>
+  <div id="bar"><button id="exit" type="button">✕ 닫기 (Esc)</button></div>
+</div>
+<script type="text/javascript">
+(function(){
+  var K={'요청':'','내용':' k2','형식':' k3'};
+  window.fmtPre=function(pr){
+    var t=pr.textContent;
+    if(!/^요청: /.test(t))return;
+    var lines=t.split('\n');pr.textContent='';pr.className='fmt';
+    lines.forEach(function(l,i){
+      var m=l.match(/^(요청|내용|형식): (.*)$/),d=document.createElement('div');
+      if(m){d.className='pl'+K[m[1]];var b=document.createElement('b');b.className='pk';b.textContent=m[1]+': ';var sp=document.createElement('span');sp.className='pt';sp.textContent=m[2];d.appendChild(b);d.appendChild(sp);}
+      else{d.className='pl c';var sp2=document.createElement('span');sp2.className='pt';sp2.textContent=l;d.appendChild(sp2);}
+      pr.appendChild(d);if(i<lines.length-1)pr.appendChild(document.createTextNode('\n'));
+    });
+  };
+  document.querySelectorAll('.copybox pre').forEach(window.fmtPre);
+})();
+</script>
+<script type="text/javascript">
+(function(){
+  var re=/^(STEP|준비|규칙서대로|분석 [1-4]|프롬프트 [AB]|프롬프트 쓰기|실습|방법 [A-C]|워밍업|[①-⑤] |\(선택\)|완성한|결과를 보고|버전|두 결과)/;
+  var nav=document.querySelector('aside nav');
+  document.querySelectorAll('main .topic').forEach(function(t){
+    var parent=nav.querySelector('a.l3[href="#'+t.id+'"]'),last=parent,n=0;
+    if(!parent)return;
+    t.querySelectorAll(':scope > p').forEach(function(p){
+      var b=p.firstElementChild;
+      if(!b||b.tagName!=='B'||p.children.length!==1||p.textContent.trim()!==b.textContent.trim()||!re.test(b.textContent.trim()))return;
+      p.classList.add('dh');p.id='d-'+t.id+'-'+(++n);
+      var a=document.createElement('a');a.className='l4';a.href='#'+p.id;a.setAttribute('data-p',t.id);
+      a.textContent=b.textContent.replace(/[:：]\s*.*$/,'').trim();
+      last.parentNode.insertBefore(a,last.nextSibling);last=a;
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+var main=document.querySelector('main'),deck=document.getElementById('deck'),box=document.getElementById('slide'),pgEl=document.getElementById('pg'),prog=document.getElementById('prog'),pages=[],i=0;
+function kids(el,skip){return Array.prototype.filter.call(el.children,function(c){return !skip(c);});}
+function logical(){
+  var out=[],hero=main.querySelector('.hero');
+  if(hero)out.push({sect:'표지',title:'',n:Array.prototype.slice.call(hero.children)});
+  Array.prototype.forEach.call(main.querySelectorAll(':scope > .section'),function(sec){
+    var h2=sec.querySelector('h2'),title=h2.textContent,head=sec.querySelector('.session-head'),n=[];
+    if(head)n=Array.prototype.slice.call(head.querySelectorAll('p'));
+    n=n.concat(kids(sec,function(c){return c.classList.contains('section-label')||c.tagName==='H2'||c.classList.contains('session-head')||c.classList.contains('topic');}));
+    if(n.length)out.push({sect:title,title:title,n:n});
+    Array.prototype.forEach.call(sec.querySelectorAll(':scope > .topic'),function(t){
+      var h3=t.querySelector('h3');
+      out.push({sect:title,title:h3.textContent,n:kids(t,function(c){return c===h3;})});
+    });
+  });
+  return out;
+}
+function over(){return box.scrollHeight>box.clientHeight+1;}
+function build(){
+  pages=[];var L=logical(),count,sl;L.forEach(function(x){var out=[];x.n.forEach(function(el){if(el.tagName==="DETAILS"){var t=el.querySelector(".summary-title");var h=document.createElement("p");h.innerHTML="<b>"+(t?t.textContent:"")+"</b>";out.push(h);Array.prototype.forEach.call(el.children,function(c){if(c.tagName!=="SUMMARY")out.push(c);});}else out.push(el);});x.n=out;});
+  function head(cont){
+    box.innerHTML='';
+    if(sl.title&&sl.sect&&sl.sect!==sl.title){var eb=document.createElement('div');eb.className='eb';eb.textContent=sl.sect;box.appendChild(eb);}
+    if(sl.title){var h=document.createElement('h3');h.className='st';h.textContent=sl.title;
+      if(cont){var c=document.createElement('span');c.className='cont';c.textContent='(이어서)';h.appendChild(c);}
+      box.appendChild(h);}
+    count=0;
+  }
+  function flush(){pages.push({html:box.innerHTML,sect:sl.sect});}
+  function addSplit(items,shellFn){
+    var shell=shellFn(),n=0;box.appendChild(shell.root);
+    items.forEach(function(it){
+      shell.add(it);n++;
+      if(over()&&(n>1||count>0)){
+        shell.remove();n--;
+        if(n===0)box.removeChild(shell.root);
+        flush();head(true);shell=shellFn();n=0;box.appendChild(shell.root);shell.add(it);n=1;
+      }
+    });
+    count++;
+  }
+  L.forEach(function(s){
+    sl=s;head(false);
+    s.n.forEach(function(el){
+      var tbl=el.classList&&el.classList.contains('table-wrap')&&el.querySelector('table');
+      var rows=tbl?Array.prototype.slice.call(tbl.rows):null;
+      var hasHead=rows&&rows.length>3&&Array.prototype.every.call(rows[0].cells,function(c){return c.tagName==='TH';})
+        &&!rows.some(function(r){return Array.prototype.some.call(r.cells,function(c){return c.rowSpan>1;});});
+      var listy=(el.tagName==='UL'||el.tagName==='OL'||(el.classList&&(el.classList.contains('procedure')||el.classList.contains('resource-list'))))&&el.children.length>1;
+      if(el.classList&&el.classList.contains('dh')&&count>1&&box.scrollHeight>box.clientHeight*0.5){flush();head(false);}
+      var c=el.cloneNode(true);box.appendChild(c);
+      if(over()&&count>0){var pv=c.previousElementSibling,lead=count>1&&pv&&pv.tagName==='P'&&pv.children.length===1&&pv.firstElementChild.tagName==='B'&&pv.textContent.trim()===pv.firstElementChild.textContent.trim();
+        box.removeChild(c);if(lead)box.removeChild(pv);flush();head(true);if(lead){box.appendChild(pv);count++;}box.appendChild(c);}
+      if(over()){
+        if(hasHead){
+          box.removeChild(c);
+          addSplit(rows.slice(1),function(){
+            var w=el.cloneNode(false),t=tbl.cloneNode(false),b=document.createElement('tbody');
+            t.appendChild(b);b.appendChild(rows[0].cloneNode(true));w.appendChild(t);
+            return {root:w,add:function(r){b.appendChild(r.cloneNode(true));},remove:function(){b.removeChild(b.lastChild);}};
+          });
+          return;
+        }
+        if(el.classList&&el.classList.contains('copybox')){
+          box.removeChild(c);
+          var lines=el.querySelector('pre').textContent.split('\n');
+          addSplit(lines,function(){
+            var w=el.cloneNode(false),hd=el.querySelector('.copyhead').cloneNode(true),pr=document.createElement('pre'),txt=[];
+            w.appendChild(hd);w.appendChild(pr);
+            return {root:w,add:function(l){txt.push(l);pr.className='';pr.textContent=txt.join('\n');window.fmtPre(pr);},remove:function(){txt.pop();pr.className='';pr.textContent=txt.join('\n');window.fmtPre(pr);}};
+          });
+          return;
+        }
+        if(listy){
+          box.removeChild(c);
+          addSplit(Array.prototype.slice.call(el.children),function(){
+            var u=el.cloneNode(false);
+            return {root:u,add:function(li){u.appendChild(li.cloneNode(true));},remove:function(){u.removeChild(u.lastChild);}};
+          });
+          return;
+        }
+      }
+      count++;
+    });
+    flush();
+  });
+  var o='<h3 class="st">전체 목차</h3><div class="outline">';
+  Array.prototype.forEach.call(document.querySelectorAll('aside nav .grp'),function(g){
+    o+='<div class="og"><b>'+g.querySelector('.grp-label').textContent+(g.querySelector('.l2')&&g.querySelector('.grp-label').textContent.indexOf('세션')===0?' · '+g.querySelector('.l2').textContent:'')+'</b>';
+    var guide=g.querySelector('.grp-label').textContent==='교육 안내';
+    Array.prototype.forEach.call(g.querySelectorAll(guide?'a.l2,a.l3':'a.l3'),function(a){o+='<span>'+a.textContent+'</span>';});
+    o+='</div>';
+  });
+  pages.splice(1,0,{html:o+'</div>',sect:'목차'});
+}
+function show(n){
+  i=Math.max(0,Math.min(pages.length-1,n));var p=pages[i];
+  box.innerHTML=p.html;box.scrollTop=0;
+  pgEl.textContent=(i+1)+' / '+pages.length;prog.style.width=((i+1)/pages.length*100)+'%';
+}
+var stage=document.getElementById('stage'),vp=document.getElementById('viewport');
+function fit(){var k=Math.min(vp.clientWidth/1280,vp.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+k+')';}
+function open(){deck.hidden=false;document.body.style.overflow='hidden';fit();var w=[].slice.call(main.querySelectorAll('img')).map(function(m){return m.complete?0:new Promise(function(r){m.onload=m.onerror=r;});});Promise.all(w).then(function(){build();show(0);});}
+function close(){deck.hidden=true;document.body.style.overflow='';}
+window.addEventListener('resize',function(){if(!deck.hidden)fit();});
+document.getElementById('slideBtn').onclick=open;
+document.getElementById('exit').onclick=close;
+document.getElementById('prev').onclick=function(){show(i-1)};
+document.getElementById('next').onclick=function(){show(i+1)};
+document.addEventListener('keydown',function(e){
+  if(deck.hidden)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')show(i+1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')show(i-1);
+  else if(e.key==='Escape')close();
+});
+document.addEventListener('click',function(e){
+  var b=e.target.closest&&e.target.closest('.copyhead button');if(!b)return;
+  var pre=b.closest('.copybox').querySelector('pre');
+  var done=function(){var t=b.textContent;b.textContent='복사됨';setTimeout(function(){b.textContent=t;},1200);};
+  if(navigator.clipboard)navigator.clipboard.writeText(pre.classList.contains('fmt')?pre.textContent:pre.innerText).then(done,done);else done();
+});
+})();
+</script>
+
+<script type="text/javascript">
+(function(){
+  var links=[].slice.call(document.querySelectorAll('aside nav a[href^="#"]'));
+  var targets=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+  function update(){
+    var y=window.scrollY+120, cur=-1;
+    targets.forEach(function(el,i){ if(el && el.getBoundingClientRect().top+window.scrollY<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('active', i===cur); });
+    var cp=null;
+    if(cur>=0){ var ca=links[cur]; cp=ca.classList.contains('l4')?ca.getAttribute('data-p'):(ca.getAttribute('href').slice(1)); }
+    links.forEach(function(a){ if(a.classList.contains('l4')) a.classList.toggle('show', a.getAttribute('data-p')===cp); });
+    if(cur>=0){ var a=links[cur], box=a.closest('aside'), r=a.getBoundingClientRect();
+      if(r.top<120||r.bottom>window.innerHeight-20) box.scrollTop+=r.top-window.innerHeight/2; }
+  }
+  window.addEventListener('scroll',update,{passive:true}); update();
+})();
+</script>
+<script type="text/javascript">
+(function(){
+  var btn=document.querySelector('.nav-toggle'), label=btn.querySelector('span'), body=document.body;
+  var mq=window.matchMedia('(max-width: 1020px)');
+  function isOpen(){ return mq.matches ? body.classList.contains('nav-open') : !body.classList.contains('nav-hidden'); }
+  function sync(){ var o=isOpen(); btn.setAttribute('aria-expanded',o); label.textContent=o?'목차 숨기기':'목차 보기'; }
+  try{ if(localStorage.getItem('navHidden')==='1') body.classList.add('nav-hidden'); }catch(e){}
+  btn.addEventListener('click',function(){
+    if(mq.matches){ body.classList.toggle('nav-open'); }
+    else{ var h=body.classList.toggle('nav-hidden'); try{ localStorage.setItem('navHidden',h?'1':'0'); }catch(e){} }
+    sync();
+  });
+  document.querySelectorAll('aside nav a').forEach(function(a){ a.addEventListener('click',function(){ if(mq.matches){ body.classList.remove('nav-open'); sync(); } }); });
+  if(mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+</script>
+</body>
+</html>

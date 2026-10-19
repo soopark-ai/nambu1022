@@ -1,0 +1,129 @@
+/**
+ * 2026학년도 미래중학교 학교 만족도 조사 구글 폼 및 스프레드시트 자동 생성 스크립트
+ */
+function createSatisfactionSurveyForm() {
+  // 1. 구글 폼 생성
+  const formTitle = "2026학년도 미래중학교 1학기 교육활동 만족도 조사";
+  const form = FormApp.create(formTitle);
+  
+  // 설문지 설명 설정
+  form.setDescription(
+    "본 조사는 2026학년도 1학기 미래중학교 교육활동에 대한 만족도를 측정하고 발전 방향을 모색하기 위한 조사입니다.\n" +
+    "응답해주신 내용은 무기명으로 처리되며 교육환경 개선을 위한 기초자료로만 활용됩니다.\n" +
+    "(조사 기간: 2026. 6. 15. ~ 6. 26.)"
+  );
+  
+  // 익명 설정 및 응답 제출 후 재응답 링크 표시
+  form.setCollectEmail(false); // 이메일 수집 차단 (익명 설문)
+  form.setShowLinkToRespondAgain(true);
+
+  // 2. 섹션(Page Break) 생성
+  // 섹션 2: 학생/학부모용 문항 섹션
+  const secStudentParents = form.addPageBreakItem().setTitle("학생·학부모 만족도 조사");
+  
+  // 섹션 3: 교직원용 문항 섹션
+  const secTeacher = form.addPageBreakItem().setTitle("교직원 만족도 조사");
+
+  // -------------------------------------------------------------
+  // [공통 문항 생성 함수]
+  // -------------------------------------------------------------
+  function addCommonQuestions(isStudentOrParent) {
+    // 학년 선택 (학생 및 학부모 섹션에만 표시)
+    if (isStudentOrParent) {
+      const gradeItem = form.addMultipleChoiceItem();
+      gradeItem.setTitle("학년")
+               .setChoiceValues(["1학년", "2학년", "3학년"])
+               .setRequired(true);
+    }
+
+    // 5점 척도 선택지
+    const scaleValues = [
+      "1점 (매우 불만족)",
+      "2점 (불만족)",
+      "3점 (보통)",
+      "4점 (만족)",
+      "5점 (매우 만족)"
+    ];
+
+    // Q1 ~ Q9 만족도 문항 목록
+    const commonQuestions = [
+      "Q1. 수업 만족도",
+      "Q2. 평가의 공정성",
+      "Q3. 진로 교육",
+      "Q4. 방과후·채움교실",
+      "Q5. 학교 안전",
+      "Q6. 가정-학교 소통",
+      "Q7. 급식",
+      "Q8. 학교 시설(화장실·냉난방)",
+      "Q9. 학교생활 전반 만족도"
+    ];
+
+    commonQuestions.forEach(function(qTitle) {
+      const mcItem = form.addMultipleChoiceItem();
+      mcItem.setTitle(qTitle)
+            .setChoiceValues(scaleValues)
+            .setRequired(true);
+    });
+
+    // 자유 의견 문항
+    const feedbackItem = form.addParagraphTextItem();
+    feedbackItem.setTitle("자유 의견")
+                .setHelpText("학교 교육활동 및 환경에 대해 하시고 싶은 의견이나 건의사항을 자유롭게 기재해 주세요.")
+                .setRequired(false);
+  }
+
+  // -------------------------------------------------------------
+  // [섹션별 문항 배치 및 제출 분기]
+  // -------------------------------------------------------------
+  // [학생·학부모 섹션]
+  addCommonQuestions(true);
+  secStudentParents.setGoToPage(FormApp.PageNavigationType.SUBMIT); // 설문 후 바로 제출
+
+  // [교직원 섹션]
+  const teacherSpecificItem = form.addMultipleChoiceItem();
+  teacherSpecificItem.setTitle("교원 업무 부담 적정성")
+                     .setHelpText("교원 업무 부담 수준 및 적정성에 대해 평가해 주세요.")
+                     .setChoiceValues([
+                       "1점 (매우 불만족)",
+                       "2점 (불만족)",
+                       "3점 (보통)",
+                       "4점 (만족)",
+                       "5점 (매우 만족)"
+                     ])
+                     .setRequired(true);
+
+  addCommonQuestions(false);
+  secTeacher.setGoToPage(FormApp.PageNavigationType.SUBMIT); // 설문 후 바로 제출
+
+  // -------------------------------------------------------------
+  // [섹션 1: 첫 화면] 분기 설정 (학생 / 학부모 / 교직원)
+  // -------------------------------------------------------------
+  const roleItem = form.addMultipleChoiceItem();
+  roleItem.setTitle("응답자 구분")
+          .setHelpText("귀하에 해당하는 항목을 선택해 주세요.")
+          .setRequired(true);
+
+  roleItem.setChoices([
+    roleItem.createChoice("학생", FormApp.PageNavigationType.CONTINUE), // 학생 -> 다음 섹션(학생·학부모)
+    roleItem.createChoice("학부모", FormApp.PageNavigationType.CONTINUE), // 학부모 -> 다음 섹션(학생·학부모)
+    roleItem.createChoice("교원", secTeacher) // 교원 -> 교직원 섹션
+  ]);
+
+  // -------------------------------------------------------------
+  // 3. 설문 응답 결과를 저장할 구글 스프레드시트 자동 연결
+  // -------------------------------------------------------------
+  const ssTitle = "2026학년도 미래중학교 1학기 교육활동 만족도 조사 (응답)";
+  const spreadsheet = SpreadsheetApp.create(ssTitle);
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, spreadsheet.getId());
+
+  // -------------------------------------------------------------
+  // 4. 실행 결과 URL 로그 출력
+  // -------------------------------------------------------------
+  Logger.log("====================================================");
+  Logger.log("🎉 구글 폼 및 응답 스프레드시트 생성이 완료되었습니다!");
+  Logger.log("----------------------------------------------------");
+  Logger.log("📌 [설문 응답 링크 (배포용)]: " + form.getPublishedUrl());
+  Logger.log("📌 [설문 편집 링크 (관리용)]: " + form.getEditUrl());
+  Logger.log("📌 [결과 스프레드시트 링크]: " + spreadsheet.getUrl());
+  Logger.log("====================================================");
+}
